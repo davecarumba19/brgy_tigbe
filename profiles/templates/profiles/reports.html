@@ -1,0 +1,13 @@
+{% extends 'based.html' %}
+{% load static %}
+
+{% block content %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Report">
+        <a href="{% url 'account' %}">
+            <input type="button" value="Cancel">
+        </a>
+    </form>
+{% endblock %}

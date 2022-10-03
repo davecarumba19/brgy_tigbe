@@ -1,0 +1,16 @@
+{% extends 'based.html' %}
+{% load static %}
+
+{% block content %}
+<div class="news-events container">
+    <div class="news-events-content">
+    <img src="{{ newsObj.featured_image.url }}" alt="">
+        <div class="news-events-details">
+            <h2 class="fw-bold">{{ newsObj.title }}</h2>
+            <p class="fw-bold">{{ newsObj.date_created }} | {{ newsObj.location }}</p>
+            <p>{{ newsObj.description }}</p>
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'based.html' %}
+{% load static %}
+
+{% block content %}
+<div class="report-request">
+    <div class="report">
+        <a href="{% url 'report-concern' %}"><i class="bi bi-flag-fill"></i> Report Concern</a>
+    </div>
+    <div class="request">
+        <a href=""><i class="bi bi-send-fill"></i> Request Document</a>
+    </div>
+</div>
+<div class="banner">
+    <h2 class="fw-bold">WELCOME TIGBEÑO, {{ profile.first_name }}!</h2>
+    <a href="{% url 'search-account' %}">
+        <input type="button" value="Search Account">
+    </a>
+</div>
+
+<div class="account-time container">
+    <div class="account">
+        <div class="account-img">
+            <img src="{{ profile.profile_image.url }}" alt="">
+        </div>
+        <div class="account-details">
+            <h4 class="fw-bold"> {{ profile.first_name }} {{ profile.last_name }} <i>@{{profile.username}}</i></h4>
+            <p>{{ profile.email }}</p>
+            <p>{{ profile.address }}</p>
+            <p>{{ profile.status }}</p>
+            <p>{{ profile.gender }}</p>
+        </div>
+    </div>
+    <div class="time-edit-account">
+        <div class="time-title">
+            <h4 class="fw-bold">Time:</h4>
+            <p id="DigitalCLOCK" class="clock" onload="showTime()"></p>
+        </div>
+        <div class="edit-account">
+            <a href="{% url 'edit-account' %}"><i class="bi bi-pen-fill"></i> Edit Profile</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="section1 container">
+    <h1>NEWS</h1>
+    
+    <div class="news-events-card container">
+        {% for news in newsObj %}
+        
+        <div class="card m-3 shadow-sm" style="width: 18rem; border-radius: 10px;">
+            <img src="{{ news.featured_image.url }}" class="card-img-top mw-100 mh-50" alt="...">
+            <div class="card-body">
+              <h5 class="card-title fw-bold" style="color: #006500;">{{ news.title }}</h5>
+              <p class="card-text">{{ news.description|slice:":130" }}...</p>
+              <a href="{% url 'single-news' news.id %}" class="btn text-white w-100" style="background-color: #006500;">View</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h1>EVENTS</h1>
+        
+        <div class="news-events-card container">
+            {% for events in eventsObj %}
+            
+            <div class="card m-3 shadow-sm" style="width: 18rem; border-radius: 10px;">
+                <img src="{{ events.featured_image.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold" style="color: #006500;">{{ events.title }}</h5>
+                  <p class="card-text">{{ events.description|slice:":130" }}...</p>
+                  <a href="{% url 'single-event' events.id %}" class="btn text-white w-100" style="background-color: #006500;">View</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+</div>
+
+{% endblock %}

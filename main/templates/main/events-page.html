@@ -1,0 +1,26 @@
+{% extends 'based.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="banner">
+        <h2 class="fw-bold">EVENTS</h2>
+    </div>
+
+    <div class="section1 container">
+        
+        <div class="news-events-card container">
+            {% for events in eventsObj %}
+            <div class="card m-3 shadow-sm" style="width: 18rem; border-radius: 10px;">
+                <img src="{{ events.featured_image.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold" style="color: #006500;">{{ events.title }}</h5>
+                  <p class="card-text">{{ events.description|slice:":130" }}...</p>
+                  <a href="{% url 'single-event' events.id %}" class="btn text-white w-100" style="background-color: #006500;">View</a>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+    </div>
+{% include "footer.html" %}
+{% endblock %}

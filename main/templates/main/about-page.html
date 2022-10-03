@@ -1,0 +1,85 @@
+{% extends 'based.html' %}
+{% load static %}
+
+{% block content %}
+<div class="banner">
+    <h2 class="fw-bold">ABOUT US</h2>
+</div>
+<div class="brgy-officials container">
+    <h3 class="fw-bold">Barangay Officials</h3>
+    <div class="brgy-captain">
+        <img src="{{ brgyofficials.profile_image.url }}" alt="">
+        <p class="text-center fw-bold mb-0">{{ brgyofficials.name }}</p>
+        <p class="text-center">{{ brgyofficials.position }}</p>
+    </div>
+    <div class="brgy-councilors">
+        {% for brgycouncilor in brgycouncilors %}
+            <div class="brgy-councilors-content">
+                <img src="{{ brgycouncilor.profile_image.url }}" alt="">
+                <p class="text-center fw-bold mb-0">{{ brgycouncilor.name }}</p>
+                <p class="text-center">{{ brgycouncilor.position }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="sk-officials container">
+    <h3 class="fw-bold">SK Officials</h3>
+    <div class="sk-chairman">
+        <img src="{{ skofficials.profile_image.url }}" alt="">
+        <p class="text-center fw-bold mb-0">{{ skofficials.name }}</p>
+        <p class="text-center">{{ skofficials.position }}</p>
+    </div>
+    <div class="sk-kagawads">
+        {% for skkagawad in skkagawads %}
+            <div class="sk-kagawads-content">
+                <img src="{{ skkagawad.profile_image.url }}" alt="">
+                <p class="text-center fw-bold mb-0">{{ skkagawad.name }}</p>
+                <p class="text-center">{{ skkagawad.position }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="brgy-history container">
+    <h3 class="fw-bold">Our History</h3>
+    <div class="brgy-history-content">
+        <p><img src="https://f.hubspotusercontent10.net/hubfs/6448316/history.jpg" alt="">
+            In the year 1730, Tigbe was a barrio with many people living in it but it was under 
+        the town of Angat. In this place many trees called “tigbe” could be found all around 
+        mostly grown along the sides of brooks and hills. Hence, the early people in this place 
+        called barrio Tigbe. Not long after the year 1730, Norzagaray became independent of Angat
+         from the proclamation of the archbishop of Manila. The proclamation was on August 1860. 
+         In this proclamation. Tigbe too was separated from Angay, thus become a barrio of Norzagaray. 
+         Since then many people from nearby places like bigan, Angat, Sta. Maria and San Jose Del Monte 
+         plucked into place, built their houses and made the place as their home. Their houses were
+          built of light materials available in the barrio like cogon and bamboo. Some houses have 
+          woods as their posts. During that time there was already a road within the barrio. The 
+          houses were built along the road. The early settlers of the barrio worked hard to strive 
+          for better means of livelihood. They cleared the forest, made their kaingins, worked in 
+          the fields and raised animals. They later formed the place a nice one to live in. they 
+          enjoyed living in the place until at last they realized their progress. At that time, 
+          they brought their products to Bocawe, Bulacan wherein they exchanged them with their 
+          everyday needs like clothing, salt and other crops or food that could not be raised in the barrio.
+        <br>
+        <br>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;During that time, the people had also their head, a lieutenant who took responsible of 
+        the people’s welfare. Apolinario Bayonbon was then their barrio lieutenant. He served as 
+        the consultant of the people whenever any trouble aroused. He safeguards the barrio very 
+        well. The people had also their religion. They believed in Christianity and so they are 
+        binded buy this religion. Through the iniative of Apolinario Bayonbon, the people were 
+        able to build their chapel wherein masses were held when they hold their feast and any
+         other religious celebrations. In this chapel, many people learned their alphabet too, 
+         under the teaching instruction of the teacher known as Maestrong Bining who came from 
+         Angat, Bulacan, but he was deprived of processing a longer life so he died after a short 
+         period of teaching the people. The Latter replaced his position and so more people became 
+         literate. The people admired Maestrang Iska known as “Fracisca alias Turmok” because she 
+         was a genius. The people upon learning to read and write were elevated into a higher way 
+         of life. They lived cooperatively and harmoniously with esach other. Regarding social 
+         condition the people are not behind. They also celebrated parties, such as wedding, baptismal, 
+         and birthday parties.
+
+        </p>
+    </div>
+</div>
+{% include "footer.html" %}
+{% endblock %}

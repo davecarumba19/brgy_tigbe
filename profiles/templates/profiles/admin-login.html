@@ -1,0 +1,22 @@
+{% extends 'based.html' %}
+{% load static %}
+
+{% block content %}
+<div class="login">
+    <div class="login-content">
+        <h2 class="fw-bold">LOGIN PORTAL FOR ADMIN ACCOUNT</h2>
+        <img src="{% static 'img/fingerprint.png' %}" alt="">
+    </div>
+    <div class="login-details">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <br>
+            <br>
+            <br>
+            <input class="username-password" type="text" name="username" placeholder="Enter Username" required>
+            <input class="username-password" type="password" name="password" placeholder="Enter Password" required>
+            <input class="loginResidentBtn" type="submit" value="Login">
+        </form>
+    </div>
+</div>
+{% endblock %}

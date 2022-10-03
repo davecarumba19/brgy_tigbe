@@ -1,0 +1,210 @@
+/* Profile */
+
+.profile-details {
+    max-width: 50%;
+    margin: 2rem;
+    padding: 3rem 2rem 2rem 2rem;
+    background-color: #eeeeee;
+    border-radius: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+.profile-details img {
+    display: block;
+    border-radius: 50%;
+    border: #006500 5px solid;
+    margin-left: auto;
+    margin-right: auto;
+}
+.profile-details h4 {
+    margin-top: 2rem;
+    padding: 10px;
+    background-color: #3d3d3d;
+    color: white;
+    text-align: center;
+    border-radius: 100px;
+}
+.profile-sub-details {
+    display: flex;
+    flex-wrap: wrap;
+}
+.profile-sub-details p {
+    width: 47%;
+    text-align: center;
+    border-radius: 100px;
+    border: #3d3d3d 1px solid;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.5rem;
+}
+
+
+/* Account */
+
+.account-time {
+    display: flex;
+    margin: 2rem 2rem 0 2rem;
+    background-color: #eeeeee;
+    border-radius: 1rem;
+}
+.account {
+    display: flex;
+    padding: 1rem;
+}
+.account-img {
+    padding: 2rem;
+}
+.account-img img {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    border: #006500 5px solid;
+}
+.account-details {
+    padding: 2rem 2rem 2rem 1rem;
+}
+.account-details h4 {
+    margin: 1.7rem 0 0 0;
+    color: #006500;
+}
+.account-details h4 i {
+    color: #696969;
+    font-weight: lighter;
+}
+.account-details p {
+    margin: 0px;
+}
+.time-edit-account {
+    padding: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+.time-title {
+    padding: 2rem;
+}
+.time-title h4 {
+    margin: 1.7rem 0 0 0;
+    color: #006500;
+}
+.clock {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+}
+.edit-account {
+    padding-left: 2rem;
+}
+.edit-account a {
+    padding: 1rem 2rem;
+    background-color: #3d3d3d;
+    border-radius: 100px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.edit-account a:hover {
+    color: white;
+    background-color: #006500;
+}
+
+/* Edit Update Account */
+
+.editUpdateAccount {
+    max-width: 40%;
+    margin: 2rem auto 2rem auto;
+    padding: 2rem;
+    border: #696969 1px solid;
+    border-radius: 1rem;
+}
+.editUpdateAccountInput {
+    display: block;
+    margin-bottom: 2rem;
+    width: 100%;
+    padding: 10px;
+    border-radius: 100px;
+    border: 2px solid #696969;
+    text-indent: 10px;
+}
+.editUpdateAccountInputBtn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    padding: 10px;
+    border-radius: 100px;
+    border: none;
+    background-color: #006500;
+    color: white;
+}
+
+/* Search */
+
+.searchAccount {
+    margin-left: auto;
+    margin-top: -1px;
+}
+.searchInput {
+    border-radius: 100px;
+    width: 20rem;
+    border: none;
+    padding: 7px;
+    text-indent: 10px;
+}
+.searchBtn {
+    border-radius: 100px;
+    width: 8rem;
+    padding: 7px;
+    background-color: white;
+    color: #006500;
+    font-weight: bold;
+}
+
+.contents {
+    max-width: 100rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+.search-profiles {
+    display: flex;
+    width: 60rem;
+    padding: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+.card-body img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.card-body a {
+    display: block;
+}
+
+/* Report Request */
+
+.report-request {
+    position: fixed;
+    margin-top: 21rem;
+    padding: 2rem;
+}
+.report, .request {
+    margin: 3rem 0 3rem 0;
+}
+.report a, .request a{
+    background-color: #3d3d3d;
+    color: white;
+    padding: 1rem;
+    text-decoration: none;
+    border-radius: 100px;
+    transition: 0.3s;
+    border: 1px #3d3d3d solid;
+}
+.report a:hover, .request a:hover {
+    background-color: white;
+    border: 1px black solid;
+    color: #006500;
+}

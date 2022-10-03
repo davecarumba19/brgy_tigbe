@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{% static 'img/Logo.png' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/news.css' %}">
+    <link rel="stylesheet" href="{% static 'css/events.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <link rel="stylesheet" href="{% static 'css/single-news-events.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login-register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile-account.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <title>{% block title %}Brgy. Tige{% endblock %}</title>
+</head>
+<body>
+
+    <nav>
+        <a href="{% url 'main-page' %}" class="text-decoration-none"><div class="logo">
+            <img src="{% static 'img/logo.png' %}" class="mt-1">
+            <h2 class="mt-4 fw-bold">BARANGAY TIGBE</h2>
+        </div></a>
+        <ul class="ms-auto mt-3">
+            {% if request.user.is_authenticated %}
+            <li>
+                <a href="{% url 'account' %}">My Account</a>
+            </li>
+            <li  class="loginBtn">
+                <a href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li>
+                <a href="{% url 'news-page' %}">News</a>
+            </li>
+            <li>
+                <a href="{% url 'events-page' %}">Events</a>
+            </li>
+            <li>
+                <a href="{% url 'about-page' %}">About Us</a>
+            </li>
+            <li  class="loginBtn">
+                <a href="{% url 'login' %}">Login/Signup</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show position-absolute w-100" role="alert">
+        <p class="m-0">{% if message.tags %} {% endif %}{{ message }}</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    
+    {% block content %}
+    
+    {% endblock %}
+    
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html>

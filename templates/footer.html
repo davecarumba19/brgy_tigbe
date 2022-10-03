@@ -1,0 +1,24 @@
+{% load static %}
+
+<div class="footer">
+        <div class="f">
+            <img src="{% static 'img/logo.png' %}">
+            <div class="fa">
+                <h1>BARANGAY TIGBE</h1>
+                <p>NORZAGARAY BULACAN</p>
+            </div>
+            <div class="fb">
+                <h3>CONTACTS</h3>
+                <p><a href="#"><i class="bi bi-telephone-fill"></i>&nbsp;&nbsp;+639123456789</a></p>
+                <p><a href="#"><i class="bi bi-envelope-fill"></i>&nbsp;&nbsp;email@gmail.com</a></p>
+                <p><a href="#"><i class="bi bi-geo-alt-fill"></i>&nbsp;&nbsp;NHV Tigbe</a></p>
+            </div>
+            <div class="fc">
+                <h3>LINKS</h3>
+                <p><a href="{% url 'news-page' %}">News</a></p>
+                <p><a href="{% url 'events-page' %">Events</a></p>
+                <p><a href="#">About Us</a></p>
+            </div>
+        </div>
+        <p>All Rights Reserved © Brgy, Tigbe. 2022</p>
+    </div>

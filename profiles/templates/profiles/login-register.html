@@ -1,0 +1,49 @@
+{% extends 'based.html' %}
+{% load static %}
+
+{% block content %}
+{% if page == login %}
+<div class="login">
+    <div class="login-content">
+        <h2 class="fw-bold">WELCOME TO BARANGAY PORTAL</h2>
+        <img src="{% static 'img/fingerprint.png' %}" alt="">
+    </div>
+    <div class="login-details">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input class="username-password" type="text" name="username" placeholder="Enter Username" required>
+            <input class="username-password" type="password" name="password" placeholder="Enter Password" required>
+            <input class="loginResidentBtn" type="submit" value="Login">
+            
+            <p class="text-center">Don't have an Account?</p>
+            <a href="{% url 'register' %}">
+                <input class="createResidentAccountBtn" type="button" value="Register">
+            </a>
+        </form>
+    </div>
+</div>
+{% elif page == loginadmin %}
+    <h1>ADMIN</h1>
+{% else %}
+    <div class="register">
+        <div class="register-content">
+            <h2 class="fw-bold">CREATE AN ACCOUNT TO ACCESS THE PORTAL</h2>
+            <img src="{% static 'img/fingerprint.png' %}" alt="">
+        </div>
+        <div class="register-details">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                    {{ field }}
+                {% endfor %}
+                <input class="registerResidentBtn" type="submit" value="Register">
+                
+                <p class="text-center">Already have an Account?</p>
+                <a href="{% url 'login' %}">
+                    <input class="loginResidentAccountBtn" type="button" value="Login">
+                </a>
+            </form>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

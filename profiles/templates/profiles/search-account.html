@@ -1,0 +1,32 @@
+{% extends 'based.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="banner">
+        <h2 class="fw-bold">SEARCH ACCOUNTS</h2>
+        <div class="searchAccount">
+            <form action="{% url 'search-account' %}" method="get">
+                <input type="search" name="searchAccount" id="" class="searchInput" placeholder="Search Resident">
+                <input type="submit" value="Search" class="searchBtn">
+            </form>
+        </div>
+    </div>
+    
+
+<div class="contents">
+    <div class="search-profiles">
+        {% for profile in profiles %}
+        <div class="card m-4" style="width: 18rem;">
+            <div class="card-body ms-auto me-auto w-100">
+                <img src="{{ profile.profile_image.url }}" alt="">
+              <h5 class="card-title text-center">{{ profile.first_name }} {{ profile.last_name }}</h5>
+              <p class="card-text text-center">@{{ profile.username }}</p>
+              <a href="{% url 'user-profile' profile.id %}" class="btn" style="background-color: #006500; color: white;">Visit Resident</a>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+</div>   
+    
+{% endblock %}
