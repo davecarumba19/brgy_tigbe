@@ -1,8 +1,10 @@
 from django.db import models
 import uuid
+from profiles.models import Profiles
 # Create your models here.
 
 class News(models.Model):
+    owner = models.ForeignKey(Profiles, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=500)
     description = models.TextField(null=True, blank=True)
     featured_image = models.ImageField(null=True, blank=True, default='default thumbnail.png')
@@ -14,6 +16,7 @@ class News(models.Model):
         return self.title
 
 class Events(models.Model):
+    owner = models.ForeignKey(Profiles, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=500)
     description = models.TextField(null=True, blank=True)
     featured_image = models.ImageField(null=True, blank=True, default='default thumbnail.png')

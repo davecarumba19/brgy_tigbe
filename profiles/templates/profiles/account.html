@@ -2,14 +2,25 @@
 {% load static %}
 
 {% block content %}
+{% if request.user.id == 1 %}
+    <div class="report-request">
+        <div class="report">
+            <a href="{% url 'create-news' %}"><i class="bi bi-plus-circle"></i> Create News</a>
+        </div>
+        <div class="request">
+            <a href="{% url 'create-events' %}"><i class="bi bi-plus-circle"></i> Create Events</a>
+        </div>
+    </div>
+{% else %}
 <div class="report-request">
     <div class="report">
         <a href="{% url 'report-concern' %}"><i class="bi bi-flag-fill"></i> Report Concern</a>
     </div>
     <div class="request">
-        <a href=""><i class="bi bi-send-fill"></i> Request Document</a>
+        <a href="{% url 'request-document' %}"><i class="bi bi-send-fill"></i> Request Document</a>
     </div>
 </div>
+{% endif %}
 <div class="banner">
     <h2 class="fw-bold">WELCOME TIGBEÑO, {{ profile.first_name }}!</h2>
     <a href="{% url 'search-account' %}">
@@ -54,6 +65,11 @@
               <h5 class="card-title fw-bold" style="color: #006500;">{{ news.title }}</h5>
               <p class="card-text">{{ news.description|slice:":130" }}...</p>
               <a href="{% url 'single-news' news.id %}" class="btn text-white w-100" style="background-color: #006500;">View</a>
+              {% if request.user.id == 1 %}
+              <a href="{% url 'update-news' news.id %}" class="btn text-white w-100 bg-primary mt-2">Update</a>
+              <a href="{% url 'delete-news' news.id %}" class="btn text-white w-100 mt-2" style="background-color:red;">Delete</a>
+              {% else %}
+              {% endif %}
             </div>
         </div>
         {% endfor %}
@@ -70,6 +86,11 @@
                   <h5 class="card-title fw-bold" style="color: #006500;">{{ events.title }}</h5>
                   <p class="card-text">{{ events.description|slice:":130" }}...</p>
                   <a href="{% url 'single-event' events.id %}" class="btn text-white w-100" style="background-color: #006500;">View</a>
+                  {% if request.user.id == 1 %}
+                  <a href="{% url 'update-events' events.id %}" class="btn text-white w-100 bg-primary mt-2">Update</a>
+                  <a href="{% url 'delete-events' events.id %}" class="btn text-white w-100 mt-2" style="background-color:red;">Delete</a>
+                  {% else %}
+                  {% endif %}
                 </div>
             </div>
             {% endfor %}

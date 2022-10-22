@@ -7,10 +7,12 @@ from django.contrib.auth.decorators import login_required
 
 def mainPage(request):
     newsObj = News.objects.all().order_by('-date_created')
+    carouselNews = News.objects.all().order_by('-date_created')[:2]
     eventsObj = Events.objects.all().order_by('-date_created')
 
     context = {
         'newsObj': newsObj,
+        'carouselNews':carouselNews,
         'eventsObj': eventsObj,
     }
     return render(request, 'main/main.html', context)
@@ -66,13 +68,16 @@ def singleEventPage(request, pk):
 
 @login_required(login_url='login')
 def createNews(request):
+    profile = request.user.profiles
     form = NewsForm()
 
     if request.method == 'POST':
         form = NewsForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('main-page')
+            news = form.save(commit=False)
+            news.owner = profile
+            news.save()
+            return redirect('account')
 
     context = {
         'form':form,
@@ -82,14 +87,15 @@ def createNews(request):
 
 @login_required(login_url='login')
 def updateNews(request, pk):
-    newsObj = News.objects.get(id=pk)
+    profile = request.user.profiles
+    newsObj = profile.news_set.get(id=pk)
     form = NewsForm(instance=newsObj)
 
     if request.method == 'POST':
         form = NewsForm(request.POST, request.FILES, instance=newsObj)
         if form.is_valid():
             form.save()
-            return redirect('main-page')
+            return redirect('account')
 
     context = {
         'form':form, 'newsObj': newsObj,
@@ -99,12 +105,12 @@ def updateNews(request, pk):
 
 @login_required(login_url='login')
 def deleteNews(request, pk):
-
-    newsObj = News.objects.get(id=pk)
+    profile = request.user.profiles
+    newsObj = profile.news_set.get(id=pk)
 
     if request.method == 'POST':
         newsObj.delete()
-        return redirect('main-page')
+        return redirect('account')
 
     context = {
         'Obj': newsObj,
@@ -114,13 +120,15 @@ def deleteNews(request, pk):
 
 @login_required(login_url='login')
 def createEvents(request):
+    profile = request.user.profiles
     form = EventsForm()
 
     if request.method == 'POST':
         form = EventsForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('main-page')
+            events = form.save(commit=False)
+            events.save()
+            return redirect('account')
 
     context = {
         'form':form,
@@ -130,14 +138,15 @@ def createEvents(request):
 
 @login_required(login_url='login')
 def updateEvents(request, pk):
-    eventsObj = Events.objects.get(id=pk)
+    profile = request.user.profiles
+    eventsObj = profile.events_set.get(id=pk)
     form = EventsForm(instance=eventsObj)
 
     if request.method == 'POST':
         form = EventsForm(request.POST, request.FILES, instance=eventsObj)
         if form.is_valid():
             form.save()
-            return redirect('main-page')
+            return redirect('account')
 
     context = {
         'form':form
@@ -147,12 +156,12 @@ def updateEvents(request, pk):
 
 @login_required(login_url='login')
 def deleteEvents(request, pk):
-
-    eventsObj = Events.objects.get(id=pk)
+    profile = request.user.profiles
+    eventsObj = profile.events_set.get(id=pk)
 
     if request.method == 'POST':
         eventsObj.delete()
-        return redirect('main-page')
+        return redirect('account')
     
     context = {
         'Obj': eventsObj,

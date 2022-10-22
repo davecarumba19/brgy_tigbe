@@ -22,12 +22,23 @@
 <body>
 
     <nav>
-        <a href="{% url 'main-page' %}" class="text-decoration-none"><div class="logo">
-            <img src="{% static 'img/logo.png' %}" class="mt-1">
-            <h2 class="mt-4 fw-bold">BARANGAY TIGBE</h2>
-        </div></a>
+        <a href="
+        {% if request.user.is_authenticated %}
+            {% url 'account' %}
+        {% else %}
+            {% url 'main-page' %}
+        {% endif %}
+        " class="text-decoration-none">
+            <div class="logo">
+                <img src="{% static 'img/logo.png' %}" class="mt-1">
+                <h2 class="mt-4 fw-bold">BARANGAY TIGBE</h2>
+            </div>
+        </a>
         <ul class="ms-auto mt-3">
             {% if request.user.is_authenticated %}
+            <li>
+                <a href="{% url 'inbox' %}">Inbox</a>
+            </li>
             <li>
                 <a href="{% url 'account' %}">My Account</a>
             </li>
@@ -66,4 +77,9 @@
 </body>
 <script src="{% static 'js/main.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+google.charts.load("current", {packages:["corechart"]});
+google.charts.setOnLoadCallback(drawChart);
+    </script>
 </html>

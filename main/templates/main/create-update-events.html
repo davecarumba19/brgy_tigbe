@@ -1,9 +1,17 @@
 {% extends 'based.html' %}
 
 {% block content %}
+
+<div class="createUpdateEventsNews">
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Create Event">
+        {% for field in form %}
+            {{ field }}
+        {% endfor %}
+        <a href="{% url 'account' %}">
+            <input type="button" value="Cancel" class="createUpdateEventsNewsCancelBtn">
+        </a>
+        <input class="createUpdateEventsNewsSubmitBtn" type="submit" value="Submit">
     </form>
+</div>
 {% endblock %}

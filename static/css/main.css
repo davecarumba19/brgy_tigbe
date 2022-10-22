@@ -197,3 +197,48 @@ nav ul li a:focus {
     color: rgb(163, 163, 163);
     text-decoration: none;
 }
+
+/* Create News */
+
+.createUpdateEventsNews {
+    max-width: 40%;
+    margin: 2rem auto 2rem auto;
+    padding: 2rem;
+    border: #696969 1px solid;
+    border-radius: 1rem;
+}
+.createUpdateEventsNewsInput {
+    display: block;
+    margin-bottom: 2rem;
+    width: 100%;
+    padding: 10px;
+    border-radius: 100px;
+    border: 2px solid #696969;
+    text-indent: 10px;
+}
+.createUpdateEventsNewsTextarea {
+    display: block;
+    margin-bottom: 2rem;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #696969;
+    text-indent: 10px;
+}
+.createUpdateEventsNewsSubmitBtn {
+    width: 30%;
+    background-color: #006500;
+    color: white;
+    float: right;
+    border: none;
+    padding: 10px;
+    border-radius: 100px;
+}
+.createUpdateEventsNewsCancelBtn {
+    width: 30%;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 100px;
+}

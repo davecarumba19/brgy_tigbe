@@ -15,6 +15,12 @@
             <p>{{ profile.status }}</p>
             <p>{{ profile.gender }}</p>
         </div>
+        {% if request.user.id == 1 %}
+        <div class="send-message-btn">
+            <a href="{% url 'create-message' profile.id %}"><p>Send Message</p></a>
+        </div>
+        {% else %}
+        {% endif %}
     </div>
 </div>
 {% endblock %}

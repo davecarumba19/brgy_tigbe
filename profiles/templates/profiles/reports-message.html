@@ -1,0 +1,17 @@
+{% extends 'based.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="request-report-message">
+    <h2>
+        <a href="{% url 'inbox' %}"><span><i class="bi bi-arrow-left-circle"></i></span></a>
+        REPORT MESSAGE
+    </h2>
+    <div class="message-content">
+        <p>{{ reportMessage.sender.first_name }} {{ reportMessage.sender.last_name }}</p>
+        <p>{{ reportMessage.date_created }}</p>
+        <p>{{ reportMessage.message }}</p>
+    </div>
+</div>
+{% endblock %}

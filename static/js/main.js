@@ -27,3 +27,22 @@ function showTime(){
 }
  
 showTime();
+
+function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Population', 'Number People'],
+      ['Male',     11859],
+      ['Female',      11829],
+      ['Children',  5920],
+      ['Senior Citizens', 5919],
+      ['Voters',    19889]
+    ]);
+
+    var options = {
+      title: 'Population of Barangay Tibge',
+      pieHole: 0.4,
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+    chart.draw(data, options);
+  }

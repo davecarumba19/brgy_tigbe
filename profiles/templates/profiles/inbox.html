@@ -1,0 +1,56 @@
+{% extends 'based.html' %}
+{% load static %}
+
+
+{% block content %}
+{% if request.user.id == 1 %}
+<div class="inbox">
+        <h2>REQUESTS ({{ unreadCountDocument }})</h2>
+        {% for request in requestDocument %}
+        <div class="message-link">
+            <a href="{% url 'request-message' request.id %}">
+                {% if request.is_read == False %}
+                    <p style="font-weight: bold;">
+                {% else %}
+                    <p>
+                {% endif %}
+                        {{ request.sender.first_name }} | {{ request.document_type }} request | {{ request.date_created }}
+                    </p>
+            </a>
+        </div>
+        {% endfor %}
+    <hr>
+        <h2>REPORTS ({{ unreadCountReport }})</h2>
+        {% for report in reportConcern %}
+        <div class="message-link">
+            <a href="{% url 'report-message' report.id %}">
+                {% if report.is_read == False %}
+                    <p style="font-weight: bold;">
+                {% else %}
+                    <p>
+                {% endif %}
+                        {{ report.sender.first_name }}'s report | {{ report.date_created }}
+                    </p>
+            </a>
+        </div>
+        {% endfor %}
+</div>
+    {% else %}
+<div class="inbox">
+    <h2>MESSAGES({{ unreadMessage }})</h2>
+     {% for message in sendMessage %}
+        <div class="message-link">
+            <a href="{% url 'view-message' message.id %}">
+                {% if message.is_read == False %}
+                    <p style="font-weight: bold;">
+                {% else %}
+                    <p>
+                {% endif %}
+                        {{ message.sender.first_name }}'s message | {{ message.date_created }}
+                    </p>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

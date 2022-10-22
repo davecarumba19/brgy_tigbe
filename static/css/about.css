@@ -117,3 +117,26 @@
     float: right;
     margin: 0 20px 20px 20px;
 }
+
+/* Brgy Statistics */
+
+.brgy-statistics {
+    max-width: 90%;
+    margin-top: 2rem;
+    margin-bottom: 0;
+}
+.brgy-statistics h3 {
+    color: white;
+    margin-bottom: 2rem;
+    background-color:#006500;
+    width: 30%;
+    padding: 10px 10px 10px 20px;
+}
+#donutchart {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+    height: 600px;
+    padding-left: 7rem;
+    
+}

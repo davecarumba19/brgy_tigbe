@@ -1,12 +1,14 @@
 {% extends 'based.html' %}
 
 {% block content %}
-
-    <h3>Are you sure you want to delete {{ Obj }}?</h3>
+<div class="createUpdateEventsNews">
+    <h3 class="mb-4 text-center">Are you sure you want to delete {{ Obj }}?</h3>
         <form action="" method="POST">
             {% csrf_token %}
-            <a href="{% url 'main-page' %}">Cancel</a>
-            <input type="submit" value="Confirm">
+            <a href="{% url 'account' %}">
+                <input type="button" value="Cancel" class="createUpdateEventsNewsCancelBtn">
+            </a>
+            <input class="createUpdateEventsNewsSubmitBtn" type="submit" value="Confirm">
         </form>
-
+</div>
 {% endblock %}

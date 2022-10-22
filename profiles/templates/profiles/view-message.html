@@ -1,0 +1,22 @@
+{% extends 'based.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="request-report-message">
+    <h2>
+        <a href="{% url 'inbox' %}"><span><i class="bi bi-arrow-left-circle"></i></span></a>
+        MESSAGE
+    </h2>
+    <div class="message-content">
+        <p>{{ sendMessage.sender.first_name }} {{ sendMessage.sender.last_name }}</p>
+        <p>{{ sendMessage.date_created }}</p>
+        <p>{{ sendMessage.your_message }}</p>
+        {% if sendMessage.your_file %}
+        <p><a href="{{ sendMessage.your_file.url }}">{{ sendMessage.your_file }}</a></p>
+        {% else %}
+        <p><a href="#">No file</a></p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

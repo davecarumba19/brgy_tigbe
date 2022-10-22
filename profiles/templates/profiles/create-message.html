@@ -1,0 +1,24 @@
+{% extends 'based.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="banner">
+    <h2 class="fw-bold">SEND MESSAGE</h2>
+</div>
+
+<div class="sendMessage">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for labels in form %}
+            {{labels}}
+        {% endfor %}
+    
+        <a href="{% url 'account' %}">
+            <input type="button" value="Cancel" class="sendMessageCancelBtn">
+        </a>
+
+        <input type="submit" value="Send Message" class="sendMessageSubmitBtn">
+    </form>
+</div>
+{% endblock %}
