@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Profiles, Reports, Requests, Messages
+from .models import Profiles, Reports, Requests, Messages, Verificationss
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -22,7 +22,7 @@ class CustomUserCreationForm(UserCreationForm):
 class ProfileForm(ModelForm):
     class Meta:
         model = Profiles
-        fields = ['email','address','status', 'gender', 'profile_image']
+        fields = ['email','address','status', 'gender', 'vaccine', 'profile_image']
 
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
@@ -30,6 +30,7 @@ class ProfileForm(ModelForm):
         self.fields['address'].widget.attrs.update({'placeholder':'Edit Address', 'class':'editUpdateAccountInput'})
         self.fields['status'].widget.attrs.update({'placeholder':'Edit Status', 'class':'editUpdateAccountInput'})
         self.fields['gender'].widget.attrs.update({'placeholder':'Edit Gender', 'class':'editUpdateAccountInput'})
+        self.fields['vaccine'].widget.attrs.update({'placeholder':'Vaccinated?', 'class':'editUpdateAccountInput'})
         self.fields['profile_image'].widget.attrs.update({'class':'editUpdateAccountInput'})
 
 
@@ -64,3 +65,25 @@ class MessageForm(ModelForm):
         super(MessageForm, self).__init__(*args, **kwargs)
         self.fields['your_message'].widget.attrs.update({'placeholder':'Enter Message' ,'class':'sendMessageInputTextarea'})
         self.fields['your_file'].widget.attrs.update({'class':'sendMessageInput'})
+
+
+class VerificationForm(ModelForm):
+    class Meta:
+        model = Verificationss
+        fields = ['address', 'brgy_id']
+
+    def __init__(self, *args, **kwargs):
+        super(VerificationForm, self).__init__(*args, **kwargs)
+        self.fields['address'].widget.attrs.update({'placeholder':'Enter Address' ,'class':'verificationInput'})
+        self.fields['brgy_id'].widget.attrs.update({'class':'verificationInput'})
+        self.fields['brgy_id'].label = "Upload your Barangay I.D.:"
+
+
+class VerifyProfileForm(ModelForm):
+    class Meta:
+        model = Profiles
+        fields = ['verified']
+
+    def __init__(self, *args, **kwargs):
+        super(VerifyProfileForm, self).__init__(*args, **kwargs)
+        self.fields['verified'].widget.attrs.update({'class':'editUpdateAccountInput'})

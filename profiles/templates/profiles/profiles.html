@@ -8,16 +8,23 @@
 
 <div class="profile-details">
         <img src="{{ profile.profile_image.url }}" alt="">
-        <h4 class="fw-bold"> {{ profile.first_name }} {{ profile.last_name }} <i>@{{profile.username}}</i></h4>
+        <h4 class="fw-bold"> {{ profile.first_name }} {{ profile.last_name }} <i>@{{profile.username}}</i>
+            {% if profile.verified == False %}
+            {% else %}
+                <i class="bi bi-patch-check-fill" style="color: rgb(64, 147, 255); padding-left:0.5rem; vertical-align:middle;"></i>
+            {% endif %}
+        </h4>
         <div class="profile-sub-details">
             <p>{{ profile.email }}</p>
             <p>{{ profile.address }}</p>
             <p>{{ profile.status }}</p>
             <p>{{ profile.gender }}</p>
+            <p>{{ profile.vaccine }}</p>
         </div>
         {% if request.user.id == 1 %}
         <div class="send-message-btn">
             <a href="{% url 'create-message' profile.id %}"><p>Send Message</p></a>
+            <a href="{% url 'verified' profile.id %}"><p>Verify Account</p></a>
         </div>
         {% else %}
         {% endif %}

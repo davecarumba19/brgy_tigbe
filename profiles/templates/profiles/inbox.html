@@ -34,6 +34,21 @@
             </a>
         </div>
         {% endfor %}
+    <hr>
+        <h2>VERIFICATIONS ({{ unreadVerification }})</h2>
+        {% for verify in verifyMessage %}
+        <div class="message-link">
+            <a href="{% url 'verify-message' verify.id %}">
+                {% if verify.is_read == False %}
+                    <p style="font-weight: bold;">
+                {% else %}
+                    <p>
+                {% endif %}
+                        {{ verify.sender.first_name }}'s verification account | {{ verify.date_created }}
+                    </p>
+            </a>
+        </div>
+        {% endfor %}
 </div>
     {% else %}
 <div class="inbox">

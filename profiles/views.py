@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Profiles
 from main.models import News, Events
-from .forms import CustomUserCreationForm, ProfileForm, ReportsForm, RequestsForm, MessageForm
+from .forms import CustomUserCreationForm, ProfileForm, ReportsForm, RequestsForm, MessageForm, VerificationForm, VerifyProfileForm
 
 
 # Create your views here.
@@ -57,7 +57,11 @@ def registerUser(request):
             login(request, user)
             return redirect('account')
         else:
-            messages.error(request, 'Error has been accurred!')
+            messages.warning(request, 'Error has been accurred!')
+            messages.warning(request, 'Your password can’t be too similar to your other personal information.')
+            messages.warning(request, 'Your password must contain at least 8 characters.')
+            messages.warning(request, 'Your password can’t be a commonly used password.')
+            messages.warning(request, 'Your password can’t be entirely numeric.')
 
     context = {
         'page':page,
@@ -159,17 +163,21 @@ def inbox(request):
     requestDocument = profile.request.all()
     reportConcern = profile.report.all()
     sendMessage = profile.message.all()
+    verifyMessage = profile.verification.all()
     unreadCountDocument = requestDocument.filter(is_read=False).count()
     unreadCountReport = reportConcern.filter(is_read=False).count()
     unreadMessage = sendMessage.filter(is_read=False).count()
+    unreadVerification = verifyMessage.filter(is_read=False).count()
 
     context = {
         'requestDocument': requestDocument,
         'reportConcern': reportConcern,
         'sendMessage': sendMessage,
+        'verifyMessage': verifyMessage,
         'unreadCountDocument': unreadCountDocument,
         'unreadCountReport': unreadCountReport,
         'unreadMessage': unreadMessage,
+        'unreadVerification': unreadVerification,
         'profile': profile,
     }
     return render(request, 'profiles/inbox.html', context)
@@ -203,6 +211,22 @@ def reportMessage(request, pk):
         'reportMessage': reportMessage
     }
     return render(request, 'profiles/reports-message.html', context)
+
+
+@login_required(login_url='login')
+def verifyMessage(request, pk):
+    profile = request.user.profiles
+    verifyMessage = profile.verification.get(id=pk)
+
+    if verifyMessage.is_read == False:
+        verifyMessage.is_read = True
+        verifyMessage.save()
+
+    context = {
+        'verifyMessage':verifyMessage,
+    }
+    return render(request, 'profiles/verify-message.html', context)
+
 
 
 @login_required(login_url='login')
@@ -247,6 +271,48 @@ def requestDocument(request):
         'form':form,
     }
     return render(request, 'profiles/request.html', context)
+
+
+
+@login_required(login_url='login')
+def verifyAccount(request):
+    profile = request.user.profiles
+    receiver = Profiles.objects.get(id='d26b5cd8-0c06-4c7a-b1ac-030894b5e356')
+    form = VerificationForm()
+
+    if request.method == 'POST':
+        form = VerificationForm(request.POST, request.FILES)
+        if form.is_valid():
+            verify = form.save(commit=False)
+            verify.sender = profile
+            verify.receiver = receiver
+
+            verify.save()
+            return redirect('account')
+
+    context = {
+        'form':form,
+    }
+    return render(request, 'profiles/verify.html', context)
+
+
+@login_required(login_url='login')
+def verified(request, pk):
+    profile = Profiles.objects.get(id=pk)
+
+    form = VerifyProfileForm(instance=profile)
+
+    if request.method == 'POST':
+        form = VerifyProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+
+            return redirect('account')
+
+    context = {
+        'form':form,
+    }
+    return render(request, 'profiles/verified.html', context)
 
 
 

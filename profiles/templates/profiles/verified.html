@@ -1,0 +1,23 @@
+{% extends 'based.html' %}
+{% load static %}
+
+{% block content %}
+<div class="banner">
+    <h2 class="fw-bold">DO YOU WANT TO VERIFY THE ACCOUNT?</h2>
+</div>
+
+<div class="request-document">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% for labels in form %}
+            {{labels}}
+        {% endfor %}
+    
+        <a href="{% url 'account' %}">
+            <input type="button" value="Cancel" class="requestDocumentCancelBtn">
+        </a>
+
+        <input type="submit" value="Verify" class="requestDocumentSubmitBtn">
+    </form>
+</div>
+{% endblock %}

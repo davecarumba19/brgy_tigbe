@@ -1,0 +1,21 @@
+{% extends 'based.html' %}
+{% load static %}
+
+{% block content %}
+<div class="banner">
+    <h2 class="fw-bold">VERIFY ACCOUNT</h2>
+</div>
+
+<div class="verification">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+    
+        <a href="{% url 'account' %}">
+            <input type="button" value="Cancel" class="verificationCancelBtn">
+        </a>
+
+        <input type="submit" value="Submit Verification" class="verificationSubmitBtn">
+    </form>
+</div>
+{% endblock %}

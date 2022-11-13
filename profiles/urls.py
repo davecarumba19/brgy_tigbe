@@ -16,10 +16,14 @@ urlpatterns = [
 
     path('report-concern/d26b5cd8-0c06-4c7a-b1ac-030894b5e356', views.reportConcern, name='report-concern'),
     path('request-document/d26b5cd8-0c06-4c7a-b1ac-030894b5e356', views.requestDocument, name='request-document'),
+    path('verification/d26b5cd8-0c06-4c7a-b1ac-030894b5e356', views.verifyAccount, name='verify-account'),
     path('create-message/<str:pk>', views.createMessage, name='create-message'),
 
     path('inbox/', views.inbox, name='inbox'),
     path('request-message/<str:pk>', views.requestMessage, name='request-message'),
     path('report-message/<str:pk>', views.reportMessage, name='report-message'),
+    path('verify-message/<str:pk>', views.verifyMessage, name='verify-message'),
     path('view-message/<str:pk>', views.viewMessage, name='view-message'),
+
+    path('verified/<str:pk>', views.verified, name='verified'),
 ]

@@ -140,6 +140,10 @@
 .editUpdateAccount form label, .editUpdateAccount form input:nth-child(7), br {
     display: none;
 }
+.editUpdateAccount form p:nth-child(5) label, .editUpdateAccount form p:nth-child(6) label {
+    display: block;
+    margin-left: 1rem;
+}
 .editUpdateAccountInput {
     display: block;
     margin-bottom: 2rem;
@@ -310,6 +314,50 @@
     border-radius: 100px;
 }
 .requestDocumentCancelBtn {
+    width: 30%;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 100px;
+}
+
+/* Verification */
+
+.verification {
+    max-width: 40%;
+    border: #696969 1px solid;
+    border-radius: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 2rem 2.3rem 2rem;
+    margin-top: 3rem;
+}
+.verification form p:nth-child(2) label {
+    display: none;
+}
+.verification form p:nth-child(3) label {
+    margin-left: 1rem;
+}
+.verificationInput {
+    display: block;
+    width: 100%;
+    margin-bottom: 2rem;
+    padding: 10px;
+    border: 2px #696969 solid;
+    text-indent: 10px;
+    border-radius: 1000px;
+}
+.verificationSubmitBtn {
+    width: auto;
+    background-color: #006500;
+    color: white;
+    float: right;
+    border: none;
+    padding: 10px;
+    border-radius: 100px;
+}
+.verificationCancelBtn {
     width: 30%;
     background-color: red;
     color: white;

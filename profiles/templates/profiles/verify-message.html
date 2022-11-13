@@ -1,0 +1,20 @@
+{% extends 'based.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="request-report-message">
+    <h2>
+        <a href="{% url 'inbox' %}"><span><i class="bi bi-arrow-left-circle"></i></span></a>
+        VERIFICATION MESSAGE
+    </h2>
+    <div class="message-content">
+        <p>{{ verifyMessage.sender.first_name }} {{ verifyMessage.sender.last_name }}</p>
+        <p>{{ verifyMessage.date_created }}</p>
+        <p style="font-weight:bold; margin: 0px;">For Verification Account:</p>
+        <p style=" margin: 0px;""><span style="font-weight: bold;">Address: </span>{{ verifyMessage.address }}</p>
+        <p style="font-weight:bold; margin: 0px;">Barangay I.D.:</p>
+        <img src="{{ verifyMessage.brgy_id.url }}" alt="" srcset="" style="width: 300px; height:auto; object-fit:cover; margin-bottom:2rem;">
+    </div>
+</div>
+{% endblock %}

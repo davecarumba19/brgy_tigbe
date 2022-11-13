@@ -127,6 +127,7 @@ def createEvents(request):
         form = EventsForm(request.POST, request.FILES)
         if form.is_valid():
             events = form.save(commit=False)
+            events.owner = profile
             events.save()
             return redirect('account')
 
