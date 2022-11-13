@@ -135,7 +135,7 @@ def loginAdmin(request):
         username = request.POST['username']
         password = request.POST['password']
 
-        user = User.objects.filter(username='dave')
+        user = User.objects.filter(username='admin')
         try:
             user.get(username=username)
         except:
