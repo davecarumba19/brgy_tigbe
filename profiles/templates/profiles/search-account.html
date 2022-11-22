@@ -20,7 +20,12 @@
         <div class="card m-4" style="width: 18rem;">
             <div class="card-body ms-auto me-auto w-100">
                 <img src="{{ profile.profile_image.url }}" alt="">
-              <h5 class="card-title text-center">{{ profile.first_name }} {{ profile.last_name }}</h5>
+              <h5 class="card-title text-center">{{ profile.first_name }} {{ profile.last_name }}
+                {% if profile.verified == False %}
+                {% else %}
+                <i class="bi bi-patch-check-fill" style="color: rgb(64, 147, 255); padding-left:0.5rem; vertical-align:middle;"></i>
+                {% endif %}
+              </h5>
               <p class="card-text text-center">@{{ profile.username }}</p>
               <a href="{% url 'user-profile' profile.id %}" class="btn" style="background-color: #006500; color: white;">Visit Resident</a>
             </div>

@@ -3,6 +3,12 @@
 
 
 {% block content %}
+<div class="banner">
+    <h2 class="fw-bold">INBOX</h2>
+    <a href="{% url 'search-account' %}">
+        <input type="button" value="Search Account">
+    </a>
+</div>
 {% if request.user.id == 1 %}
 <div class="inbox">
         <h2>REQUESTS ({{ unreadCountDocument }})</h2>

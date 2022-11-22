@@ -24,6 +24,11 @@ urlpatterns = [
     path('report-message/<str:pk>', views.reportMessage, name='report-message'),
     path('verify-message/<str:pk>', views.verifyMessage, name='verify-message'),
     path('view-message/<str:pk>', views.viewMessage, name='view-message'),
+    path('single-request-message/<str:pk>', views.singleRequestMessage, name='single-request-message'),
+    path('single-report-message/<str:pk>', views.singleReportMessage, name='single-report-message'),
 
     path('verified/<str:pk>', views.verified, name='verified'),
+
+    path('history/', views.history, name='history'),
+    path('single-history/<str:pk>', views.singleHistory, name='single-history'),
 ]

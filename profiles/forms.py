@@ -11,18 +11,18 @@ class CustomUserCreationForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'placeholder':'Enter Username', 'class':'registerInput'})
-        self.fields['first_name'].widget.attrs.update({'placeholder':'Enter First Name', 'class':'registerInput'})
-        self.fields['last_name'].widget.attrs.update({'placeholder':'Enter Last Name', 'class':'registerInput'})
-        self.fields['email'].widget.attrs.update({'placeholder':'Enter Email', 'class':'registerInput'})
-        self.fields['password1'].widget.attrs.update({'placeholder':'Enter Password', 'class':'registerInput'})
-        self.fields['password2'].widget.attrs.update({'placeholder':'Confirm Password', 'class':'registerInput'})
+        self.fields['username'].widget.attrs.update({'placeholder':'Enter Username', 'class':'registerInput', 'required':'required'})
+        self.fields['first_name'].widget.attrs.update({'placeholder':'Enter First Name ex.John', 'class':'registerInput', 'required':'required'})
+        self.fields['last_name'].widget.attrs.update({'placeholder':'Enter Last Name ex.Bual', 'class':'registerInput', 'required':'required'})
+        self.fields['email'].widget.attrs.update({'placeholder':'Enter Email ex.john@email.com', 'class':'registerInput'})
+        self.fields['password1'].widget.attrs.update({'placeholder':'Enter Password ex.Akosijohn12345', 'class':'registerInput', 'required':'required'})
+        self.fields['password2'].widget.attrs.update({'placeholder':'Confirm Password', 'class':'registerInput', 'required':'required'})
 
 
 class ProfileForm(ModelForm):
     class Meta:
         model = Profiles
-        fields = ['email','address','status', 'gender', 'vaccine', 'profile_image']
+        fields = ['email','phone_number', 'address', 'status', 'gender', 'vaccine', 'profile_image']
 
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
@@ -31,6 +31,7 @@ class ProfileForm(ModelForm):
         self.fields['status'].widget.attrs.update({'placeholder':'Edit Status', 'class':'editUpdateAccountInput'})
         self.fields['gender'].widget.attrs.update({'placeholder':'Edit Gender', 'class':'editUpdateAccountInput'})
         self.fields['vaccine'].widget.attrs.update({'placeholder':'Vaccinated?', 'class':'editUpdateAccountInput'})
+        self.fields['phone_number'].widget.attrs.update({'placeholder':'Phone Number', 'class':'editUpdateAccountInput'})
         self.fields['profile_image'].widget.attrs.update({'class':'editUpdateAccountInput'})
 
 
@@ -41,8 +42,8 @@ class ReportsForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ReportsForm, self).__init__(*args, **kwargs)
-        self.fields['location'].widget.attrs.update({'placeholder':'Enter Location', 'class':'reportsConcernInput'})
-        self.fields['message'].widget.attrs.update({'placeholder':'Your Message', 'class':'reportsConcernInput'})
+        self.fields['location'].widget.attrs.update({'placeholder':'Enter Location', 'class':'reportsConcernInput', 'required':'required'})
+        self.fields['message'].widget.attrs.update({'placeholder':'Your Message', 'class':'reportsConcernInput', 'required':'required'})
 
 class RequestsForm(ModelForm):
     class Meta:
@@ -51,8 +52,8 @@ class RequestsForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(RequestsForm, self).__init__(*args, **kwargs)
-        self.fields['document_type'].widget.attrs.update({'class':'requestDocumentInput'})
-        self.fields['purpose'].widget.attrs.update({'placeholder':'Document Purpose' ,'class':'requestDocumentInput'})
+        self.fields['document_type'].widget.attrs.update({'class':'requestDocumentInput', 'required':'required'})
+        self.fields['purpose'].widget.attrs.update({'placeholder':'Document Purpose' ,'class':'requestDocumentInput', 'required':'required'})
 
 
 
@@ -63,7 +64,7 @@ class MessageForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(MessageForm, self).__init__(*args, **kwargs)
-        self.fields['your_message'].widget.attrs.update({'placeholder':'Enter Message' ,'class':'sendMessageInputTextarea'})
+        self.fields['your_message'].widget.attrs.update({'placeholder':'Enter Message' ,'class':'sendMessageInputTextarea', 'required':'required'})
         self.fields['your_file'].widget.attrs.update({'class':'sendMessageInput'})
 
 
@@ -74,8 +75,8 @@ class VerificationForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(VerificationForm, self).__init__(*args, **kwargs)
-        self.fields['address'].widget.attrs.update({'placeholder':'Enter Address' ,'class':'verificationInput'})
-        self.fields['brgy_id'].widget.attrs.update({'class':'verificationInput'})
+        self.fields['address'].widget.attrs.update({'placeholder':'Enter Address' ,'class':'verificationInput', 'required':'required'})
+        self.fields['brgy_id'].widget.attrs.update({'class':'verificationInput', 'required':'required'})
         self.fields['brgy_id'].label = "Upload your Barangay I.D.:"
 
 

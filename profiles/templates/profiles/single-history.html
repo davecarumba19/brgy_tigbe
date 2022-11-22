@@ -1,0 +1,33 @@
+{% extends 'based.html' %}
+{% load static %}
+
+{% block content %}
+<div class="banner">
+    <h2 class="fw-bold">{{ profile.first_name }}'s Requests & Reports History</h2>
+    <a href="{% url 'search-account' %}">
+        <input type="button" value="Search Account">
+    </a>
+</div>
+<div class="inbox">
+        <h2>TOTAL REQUESTS ({{ singleTotalRequest }})</h2>
+        {% for single_request in singleHistoryRequest %}
+        <div class="message-link">
+            <a href="{% url 'single-request-message' single_request.id %}">
+                    <p>
+                        {{ profile.first_name }}'s {{ single_request.document_type }} request | {{ single_request.date_created }}
+                    </p>
+            </a>
+        </div>
+        {% endfor %}
+    <hr>
+        <h2>TOTAL REPORTS ({{ singleTotalReports }})</h2>
+        {% for single_report in singleHistoryReports %}
+        <div class="message-link">
+            <a href="{% url 'single-report-message' single_report.id %}">
+                    <p>
+                        {{ profile.first_name }}'s report | {{ single_report.date_created }}
+                    </p>
+            </a>
+        </div>
+        {% endfor %}
+{% endblock %}

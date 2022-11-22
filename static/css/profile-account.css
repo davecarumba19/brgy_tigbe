@@ -85,7 +85,7 @@
     padding: 2rem 2rem 2rem 1rem;
 }
 .account-details h4 {
-    margin: 1.7rem 0 0 0;
+    margin: 1rem 0 0 0;
     color: #006500;
 }
 .account-details h4 i {
@@ -407,6 +407,7 @@
 }
 .message-content p:nth-child(3){
     margin-bottom: 0;
+    overflow-wrap: break-word;
 }
 .message-content p:nth-child(4) {
     margin-top: 2rem;

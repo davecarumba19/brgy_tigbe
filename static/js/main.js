@@ -39,7 +39,7 @@ function drawChart() {
     ]);
 
     var options = {
-      title: 'Population of Barangay Tibge',
+      title: 'Total Population of Barangay Tigbe: 23,688',
       pieHole: 0.4,
     };
 

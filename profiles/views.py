@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 from django.contrib import messages
-from .models import Profiles
+from .models import Profiles, Requests, Reports, Verificationss
 from main.models import News, Events
 from .forms import CustomUserCreationForm, ProfileForm, ReportsForm, RequestsForm, MessageForm, VerificationForm, VerifyProfileForm
 
@@ -54,6 +54,7 @@ def registerUser(request):
             user.save()
 
             messages.success(request, 'User has been created!')
+            messages.success(request, 'Verify your Profile to Access Request Document and Report Concerns feature!')
             login(request, user)
             return redirect('account')
         else:
@@ -198,6 +199,18 @@ def requestMessage(request, pk):
     return render(request, 'profiles/request-message.html', context)
 
 
+
+@login_required(login_url='login')
+def singleRequestMessage(request, pk):
+    requestMessage = Requests.objects.get(id=pk)
+
+    context = {
+        'requestMessage':requestMessage
+    }
+    return render(request, 'profiles/single-request-message.html', context)
+
+
+
 @login_required(login_url='login')
 def reportMessage(request, pk):
     profile = request.user.profiles
@@ -211,6 +224,18 @@ def reportMessage(request, pk):
         'reportMessage': reportMessage
     }
     return render(request, 'profiles/reports-message.html', context)
+
+
+
+@login_required(login_url='login')
+def singleReportMessage(request, pk):
+    reportMessage = Reports.objects.get(id=pk)
+
+    context = {
+        'reportMessage':reportMessage
+    }
+    return render(request, 'profiles/single-reports-message.html', context)
+
 
 
 @login_required(login_url='login')
@@ -352,3 +377,49 @@ def viewMessage(request, pk):
     }
     return render(request, 'profiles/view-message.html', context)
 
+
+@login_required(login_url='login')
+def history(request):
+    profile = request.user.profiles
+    historyRequest = Requests.objects.all().order_by('-date_created')
+    historyReports = Reports.objects.all().order_by('-date_created')
+    historyVerifications = Verificationss.objects.all().order_by('-date_created')
+    totalRequest = Requests.objects.all().count()
+    totalReports = Reports.objects.all().count()
+    totalVerifications = Verificationss.objects.all().count()
+    singleHistoryRequest = Requests.objects.filter(sender=profile.id).order_by('-date_created')
+    singleHistoryReports = Reports.objects.filter(sender=profile.id).order_by('-date_created')
+    singleTotalRequest = Requests.objects.filter(sender=profile.id).count()
+    singleTotalReports = Reports.objects.filter(sender=profile.id).count()
+
+    context = {
+        'historyRequest': historyRequest,
+        'historyReports': historyReports,
+        'historyVerifications': historyVerifications,
+        'totalRequest': totalRequest,
+        'totalReports': totalReports,
+        'totalVerifications': totalVerifications,
+        'singleHistoryRequest': singleHistoryRequest,
+        'singleHistoryReports': singleHistoryReports,
+        'singleTotalRequest': singleTotalRequest,
+        'singleTotalReports': singleTotalReports,
+    }
+    return render(request, 'profiles/history.html', context)
+
+
+@login_required(login_url='login')
+def singleHistory(request, pk):
+    profile = Profiles.objects.get(id=pk)
+    singleHistoryRequest = Requests.objects.filter(sender=pk).order_by('-date_created')
+    singleHistoryReports = Reports.objects.filter(sender=pk).order_by('-date_created')
+    singleTotalRequest = Requests.objects.filter(sender=pk).count()
+    singleTotalReports = Reports.objects.filter(sender=pk).count()
+
+    context = {
+        'profile': profile,
+        'singleHistoryRequest': singleHistoryRequest,
+        'singleHistoryReports': singleHistoryReports,
+        'singleTotalRequest': singleTotalRequest,
+        'singleTotalReports': singleTotalReports,
+    }
+    return render(request, 'profiles/single-history.html', context)

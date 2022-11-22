@@ -1,0 +1,16 @@
+{% extends 'based.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="request-report-message">
+    <h2>
+        REQUEST MESSAGE
+    </h2>
+    <div class="message-content">
+        <p>{{ requestMessage.sender.first_name }} {{ requestMessage.sender.last_name }}</p>
+        <p>{{ requestMessage.date_created }}</p>
+        <p>May I request a {{ requestMessage.document_type }} for {{ requestMessage.purpose }}?</p>
+    </div>
+</div>
+{% endblock %}

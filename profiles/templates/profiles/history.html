@@ -1,0 +1,59 @@
+{% extends 'based.html' %}
+{% load static %}
+
+{% block content %}
+<div class="banner">
+    <h2 class="fw-bold">HISTORY</h2>
+    <a href="{% url 'search-account' %}">
+        <input type="button" value="Search Account">
+    </a>
+</div>
+{% if request.user.id == 1 %}
+<div class="inbox">
+        <h2>TOTAL REQUESTS ({{ totalRequest }})</h2>
+        {% for request in historyRequest %}
+        <div class="message-link">
+            <a href="{% url 'single-request-message' request.id %}">
+                    <p>
+                        {{ request.sender.first_name }} | {{ request.document_type }} request | {{ request.date_created }}
+                    </p>
+            </a>
+        </div>
+        {% endfor %}
+    <hr>
+        <h2>TOTAL REPORTS ({{ totalReports }})</h2>
+        {% for report in historyReports %}
+        <div class="message-link">
+            <a href="{% url 'single-report-message' report.id %}">
+                    <p>
+                        {{ report.sender.first_name }}'s report | {{ report.date_created }}
+                    </p>
+            </a>
+        </div>
+        {% endfor %}
+</div>
+    {% else %}
+<div class="inbox">
+        <h2>MY TOTAL REQUESTS ({{ singleTotalRequest }})</h2>
+        {% for single_request in singleHistoryRequest %}
+        <div class="message-link">
+            <a href="{% url 'single-request-message' single_request.id %}">
+                    <p>
+                        My {{ single_request.document_type }} request | {{ single_request.date_created }}
+                    </p>
+            </a>
+        </div>
+        {% endfor %}
+    <hr>
+        <h2>MY TOTAL REPORTS ({{ singleTotalReports }})</h2>
+        {% for single_report in singleHistoryReports %}
+        <div class="message-link">
+            <a href="{% url 'single-report-message' single_report.id %}">
+                    <p>
+                        My report | {{ single_report.date_created }}
+                    </p>
+            </a>
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

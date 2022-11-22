@@ -1,0 +1,16 @@
+{% extends 'based.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="request-report-message">
+    <h2>
+        REPORT MESSAGE
+    </h2>
+    <div class="message-content">
+        <p>{{ reportMessage.sender.first_name }} {{ reportMessage.sender.last_name }}</p>
+        <p>{{ reportMessage.location }} | {{ reportMessage.date_created }}</p>
+        <p>{{ reportMessage.message }}</p>
+    </div>
+</div>
+{% endblock %}

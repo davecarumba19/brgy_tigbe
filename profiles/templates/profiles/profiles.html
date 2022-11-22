@@ -25,6 +25,7 @@
         <div class="send-message-btn">
             <a href="{% url 'create-message' profile.id %}"><p>Send Message</p></a>
             <a href="{% url 'verified' profile.id %}"><p>Verify Account</p></a>
+            <a href="{% url 'single-history' profile.id %}" class="bg-primary"><p>View Request & Report History</p></a>
         </div>
         {% else %}
         {% endif %}

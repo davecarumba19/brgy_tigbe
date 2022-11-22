@@ -23,6 +23,7 @@ class Profiles(models.Model):
     verified = models.BooleanField(default=False, null=True)
     address = models.CharField(max_length=500, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
+    phone_number = models.CharField(max_length=11, null=True, blank=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
     def __str__(self):
