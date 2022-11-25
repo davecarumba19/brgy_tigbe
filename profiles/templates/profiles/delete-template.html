@@ -1,0 +1,15 @@
+{% extends 'based.html' %}
+
+{% block content %}
+<div class="createUpdateEventsNews">
+    <h3 class="mb-4 text-center">Are you sure you want to delete {{ Obj.document_type }} request?</h3>
+    <p style="text-align: center; margin-top:0px; margin-bottom: 2rem;">Date Created: {{ Obj.date_created }}</p>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <a href="{% url 'account' %}">
+                <input type="button" value="Cancel" class="createUpdateEventsNewsCancelBtn">
+            </a>
+            <input class="createUpdateEventsNewsSubmitBtn" type="submit" value="Confirm">
+        </form>
+</div>
+{% endblock %}

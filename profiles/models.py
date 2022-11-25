@@ -54,6 +54,8 @@ class Requests(models.Model):
 
     sender = models.ForeignKey(Profiles, on_delete=models.CASCADE, null=True, blank=True)
     receiver = models.ForeignKey(Profiles, on_delete=models.CASCADE, null=True, blank=True, related_name='request')
+    sender_username = models.CharField(max_length=1000, null=True, blank=True, editable=False)
+    receiver_username = models.CharField(max_length=1000, null=True, blank=True, editable=False)
     document_type = models.CharField(max_length=1000, null=True, blank=True, choices=DOCUMENT)
     purpose = models.CharField(max_length=1000, null=True, blank=True)
     is_read = models.BooleanField(default=False, null=True)

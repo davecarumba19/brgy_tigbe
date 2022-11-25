@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     'main.apps.MainConfig',
     'profiles.apps.ProfilesConfig',
+
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +135,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/img')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True

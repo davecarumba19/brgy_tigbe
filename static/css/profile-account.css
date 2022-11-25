@@ -140,7 +140,7 @@
 .editUpdateAccount form label, .editUpdateAccount form input:nth-child(7), br {
     display: none;
 }
-.editUpdateAccount form p:nth-child(5) label, .editUpdateAccount form p:nth-child(6) label {
+.editUpdateAccount form p:nth-child(5) label, .editUpdateAccount form p:nth-child(6) label, .editUpdateAccount form p:nth-child(7) label {
     display: block;
     margin-left: 1rem;
 }

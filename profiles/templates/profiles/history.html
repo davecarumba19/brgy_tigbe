@@ -10,24 +10,30 @@
 </div>
 {% if request.user.id == 1 %}
 <div class="inbox">
-        <h2>TOTAL REQUESTS ({{ totalRequest }})</h2>
+        <h2>TOTAL REQUESTS ({{ totalRequest }}) <span style="float: right; font-size: 20px; background-color: #006500; border-radius: 100px; padding: 10px 20px;"><a href="{% url 'export-data-requests' %}" style="color: white; text-decoration:none;">Download Data</a></span></h2>
         {% for request in historyRequest %}
-        <div class="message-link">
+        <div class="message-link" style="display: flex; justify-content: space-between;">
             <a href="{% url 'single-request-message' request.id %}">
                     <p>
-                        {{ request.sender.first_name }} | {{ request.document_type }} request | {{ request.date_created }}
+                        {{ request.sender.first_name }} | {{ request.document_type }} request | {{ request.date_created }} 
                     </p>
+            </a>
+            <a href="{% url 'delete-request' request.id %}">
+                <i class="bi bi-trash-fill" style="color: red;"></i>
             </a>
         </div>
         {% endfor %}
     <hr>
-        <h2>TOTAL REPORTS ({{ totalReports }})</h2>
+        <h2>TOTAL REPORTS ({{ totalReports }}) <span style="float: right; font-size: 20px; background-color: #006500; border-radius: 100px; padding: 10px 20px;"><a href="{% url 'export-data-reports' %}" style="color: white; text-decoration:none;">Download Data</a></span></h2>
         {% for report in historyReports %}
-        <div class="message-link">
+        <div class="message-link" style="display: flex; justify-content: space-between;">
             <a href="{% url 'single-report-message' report.id %}">
                     <p>
                         {{ report.sender.first_name }}'s report | {{ report.date_created }}
                     </p>
+            </a>
+            <a href="{% url 'delete-report' report.id %}">
+                <i class="bi bi-trash-fill" style="color: red;"></i>
             </a>
         </div>
         {% endfor %}

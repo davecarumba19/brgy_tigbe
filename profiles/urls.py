@@ -31,4 +31,10 @@ urlpatterns = [
 
     path('history/', views.history, name='history'),
     path('single-history/<str:pk>', views.singleHistory, name='single-history'),
+
+    path('export-data-requests/', views.export_data_requests, name='export-data-requests'),
+    path('export-data-reports/', views.export_data_reports, name='export-data-reports'),
+
+    path('delete-request/<str:pk>', views.deleteRequest, name='delete-request'),
+    path('delete-report/<str:pk>', views.deleteReport, name='delete-report'),
 ]

@@ -4,11 +4,16 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+from django.db.models import Q
+
 from django.contrib import messages
 from .models import Profiles, Requests, Reports, Verificationss
 from main.models import News, Events
 from .forms import CustomUserCreationForm, ProfileForm, ReportsForm, RequestsForm, MessageForm, VerificationForm, VerifyProfileForm
 
+from .resources import RequestResource, ReportResource
+from django.http import HttpResponse
+from tablib import Dataset
 
 # Create your views here.
 
@@ -118,7 +123,10 @@ def searchAccount(request):
     if request.GET.get('searchAccount'):
         search_account = request.GET.get('searchAccount')
     
-    profiles = Profiles.objects.filter(first_name__icontains=search_account)
+    profiles = Profiles.objects.filter(
+        Q(first_name__icontains=search_account) |
+        Q(id__icontains=search_account)
+        )
 
     context = {
         'profiles':profiles
@@ -288,6 +296,8 @@ def requestDocument(request):
             request = form.save(commit=False)
             request.sender = profile
             request.receiver = receiver
+            request.sender_username = profile.username
+            request.receiver_username = receiver.username
 
             request.save()
             return redirect('account')
@@ -423,3 +433,77 @@ def singleHistory(request, pk):
         'singleTotalReports': singleTotalReports,
     }
     return render(request, 'profiles/single-history.html', context)
+
+
+@login_required(login_url='login')
+def export_data_requests(request):
+    if request.method == 'POST':
+        # Get selected option from form
+        file_format = request.POST['file-format']
+        request_resource = RequestResource()
+        dataset = request_resource.export()
+        if file_format == 'CSV':
+            response = HttpResponse(dataset.csv, content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="requests_exported_data.csv"'
+            return response        
+        elif file_format == 'JSON':
+            response = HttpResponse(dataset.json, content_type='application/json')
+            response['Content-Disposition'] = 'attachment; filename="exported_data.json"'
+            return response
+        elif file_format == 'XLS (Excel)':
+            response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="exported_data.xls"'
+            return response   
+
+    return render(request, 'profiles/export.html')
+
+
+@login_required(login_url='login')
+def export_data_reports(request):
+    if request.method == 'POST':
+        # Get selected option from form
+        file_format = request.POST['file-format']
+        report_resource = ReportResource()
+        dataset = report_resource.export()
+        if file_format == 'CSV':
+            response = HttpResponse(dataset.csv, content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="reports_exported_data.csv"'
+            return response        
+        elif file_format == 'JSON':
+            response = HttpResponse(dataset.json, content_type='application/json')
+            response['Content-Disposition'] = 'attachment; filename="exported_data.json"'
+            return response
+        elif file_format == 'XLS (Excel)':
+            response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="exported_data.xls"'
+            return response   
+
+    return render(request, 'profiles/export.html')
+
+
+@login_required(login_url='login')
+def deleteRequest(request, pk):
+    requestObj = Requests.objects.get(id=pk)
+
+    if request.method == 'POST':
+        requestObj.delete()
+        return redirect('account')
+
+    context = {
+        'Obj': requestObj,
+    }
+    return render(request, 'profiles/delete-template.html', context)
+
+
+@login_required(login_url='login')
+def deleteReport(request, pk):
+    reportObj = Reports.objects.get(id=pk)
+
+    if request.method == 'POST':
+        reportObj.delete()
+        return redirect('account')
+
+    context = {
+        'Obj': reportObj,
+    }
+    return render(request, 'profiles/delete-template.html', context)

@@ -1,0 +1,24 @@
+{% extends 'based.html' %}
+{% load static %}
+
+{% block content %}
+<div class="banner">
+  <h2 class="fw-bold">EXPORT DATA</h2>
+</div>
+<div class="report-concern">
+
+  <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <p>Please select format of file.</p>
+      <select name="file-format" class="form-control my-3">
+          <option selected>Choose format...</option>
+          <option>CSV</option>
+        </select>
+      <button class="reportsConcernSubmitBtn" type="submit">Export</button>
+    </form>
+    <a href="{% url 'account' %}">
+      <input type="button" value="Cancel" class="reportsConcernCancelBtn">
+  </a>
+</div>
+  
+  {% endblock %} 
