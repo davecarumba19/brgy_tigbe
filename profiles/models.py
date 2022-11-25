@@ -33,6 +33,8 @@ class Profiles(models.Model):
 class Reports(models.Model):
     sender = models.ForeignKey(Profiles, on_delete=models.CASCADE, null=True, blank=True)
     receiver = models.ForeignKey(Profiles, on_delete=models.CASCADE, null=True, blank=True, related_name='report')
+    sender_username = models.CharField(max_length=1000, null=True, blank=True, editable=False)
+    receiver_username = models.CharField(max_length=1000, null=True, blank=True, editable=False)
     location = models.CharField(max_length=1000, null=True, blank=True)
     message = models.TextField(null=True, blank=True)
     is_read = models.BooleanField(default=False, null=True)

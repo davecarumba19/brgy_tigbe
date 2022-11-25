@@ -274,6 +274,8 @@ def reportConcern(request):
             report = form.save(commit=False)
             report.sender = profile
             report.receiver = receiver
+            report.sender_username = profile.username
+            report.receiver_username = receiver.username
 
             report.save()
             return redirect('account')
