@@ -38,6 +38,7 @@ class Reports(models.Model):
     location = models.CharField(max_length=1000, null=True, blank=True)
     message = models.TextField(null=True, blank=True)
     is_read = models.BooleanField(default=False, null=True)
+    hide = models.BooleanField(default=False, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
@@ -61,6 +62,7 @@ class Requests(models.Model):
     document_type = models.CharField(max_length=1000, null=True, blank=True, choices=DOCUMENT)
     purpose = models.CharField(max_length=1000, null=True, blank=True)
     is_read = models.BooleanField(default=False, null=True)
+    hide = models.BooleanField(default=False, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 

@@ -396,8 +396,8 @@ def history(request):
     historyRequest = Requests.objects.all().order_by('-date_created')
     historyReports = Reports.objects.all().order_by('-date_created')
     historyVerifications = Verificationss.objects.all().order_by('-date_created')
-    totalRequest = Requests.objects.all().count()
-    totalReports = Reports.objects.all().count()
+    totalRequest = Requests.objects.filter(hide=False).count()
+    totalReports = Reports.objects.filter(hide=False).count()
     totalVerifications = Verificationss.objects.all().count()
     singleHistoryRequest = Requests.objects.filter(sender=profile.id).order_by('-date_created')
     singleHistoryReports = Reports.objects.filter(sender=profile.id).order_by('-date_created')
@@ -488,7 +488,8 @@ def deleteRequest(request, pk):
     requestObj = Requests.objects.get(id=pk)
 
     if request.method == 'POST':
-        requestObj.delete()
+        requestObj.hide = True
+        requestObj.save()
         return redirect('account')
 
     context = {
@@ -502,7 +503,8 @@ def deleteReport(request, pk):
     reportObj = Reports.objects.get(id=pk)
 
     if request.method == 'POST':
-        reportObj.delete()
+        reportObj.hide = True
+        reportObj.save()
         return redirect('account')
 
     context = {
