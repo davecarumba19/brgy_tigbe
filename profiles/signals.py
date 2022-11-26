@@ -27,6 +27,9 @@ def updateUser(sender, instance, created, **kwargs):
 
 @receiver(post_delete, sender=Profiles)
 def deleteProfile(sender, instance, **kwargs):
-    user = instance.user
-    user.delete()
+    try: 
+        user = instance.user
+        user.delete()
+    except:
+        pass
         
