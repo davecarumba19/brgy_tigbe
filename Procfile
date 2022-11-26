@@ -1,1 +1,1 @@
-web: gunicorn tigbe.wsgi --log-file -
+web: gunicorn tigbe.wsgi
