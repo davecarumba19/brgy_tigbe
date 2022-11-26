@@ -439,11 +439,12 @@ def singleHistory(request, pk):
 
 @login_required(login_url='login')
 def export_data_requests(request):
+    hide = Requests.objects.filter(hide=False)
     if request.method == 'POST':
         # Get selected option from form
         file_format = request.POST['file-format']
         request_resource = RequestResource()
-        dataset = request_resource.export()
+        dataset = request_resource.export(hide)
         if file_format == 'CSV':
             response = HttpResponse(dataset.csv, content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename="requests_exported_data.csv"'
@@ -462,11 +463,12 @@ def export_data_requests(request):
 
 @login_required(login_url='login')
 def export_data_reports(request):
+    hide = Reports.objects.filter(hide=False)
     if request.method == 'POST':
         # Get selected option from form
         file_format = request.POST['file-format']
         report_resource = ReportResource()
-        dataset = report_resource.export()
+        dataset = report_resource.export(hide)
         if file_format == 'CSV':
             response = HttpResponse(dataset.csv, content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename="reports_exported_data.csv"'
