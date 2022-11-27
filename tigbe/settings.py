@@ -149,4 +149,4 @@ IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 django_heroku.settings(locals())
 
-CSRF_TRUSTED_ORIGINS = ['https://brgytigbe-production.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://brgytigbe-production.up.railway.app']
