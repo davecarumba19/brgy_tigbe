@@ -1,0 +1,134 @@
+.login {
+    max-width: 50%;
+    height: 28rem;
+    display: flex;
+    margin: 4rem auto 4rem auto;
+    justify-content: center;
+    border: 1px solid #3d3d3d6c;
+    border-radius: 1rem;
+}
+.login-content {
+    border-radius: 1rem 0 0 1rem;
+    background-color: #006500;
+    width: 40%;
+}
+.login-content h2 {
+    color: white;
+    padding: 25px;
+}
+.login-content img {
+    width: 100%;
+    z-index: 0;
+}
+.login-details {
+    padding: 2rem;
+    width: 60%;
+}
+.login-details form input {
+    display: block;
+}
+.login-details form p {
+    margin-top: 5rem;
+}
+.login-details form a {
+    text-decoration: none;
+}
+.username-password {
+    width: 90%;
+    border-radius: 100px;
+    border: 2px solid #3d3d3d6c;
+    padding: 9px;
+    text-indent: 15px;
+    background-color: #eeeeee;
+    margin: 1rem auto 1rem auto;
+}
+.loginResidentBtn {
+    background-color: #006500;
+    border: none;
+    border-radius: 100px;
+    padding: 8px;
+    color: white;
+    width: 90%;
+    margin: 2rem auto 1rem auto;
+    font-size: 18px;
+}
+.createResidentAccountBtn {
+    background-color: #3d3d3d;
+    border: none;
+    border-radius: 100px;
+    padding: 8px;
+    color: white;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+}
+
+/* Register */
+
+.register {
+    max-width: 50%;
+    height: 42rem;
+    display: flex;
+    margin: 4rem auto 4rem auto;
+    justify-content: center;
+    border: 1px solid #3d3d3d6c;
+    border-radius: 1rem;
+}
+.register-content {
+    border-radius: 1rem 0 0 1rem;
+    background-color: #006500;
+    width: 40%;
+}
+.register-content h2 {
+    color: white;
+    padding: 25px;
+}
+.register-content img {
+    width: 100%;
+    margin-top: 11.5rem;
+    z-index: 0;
+}
+.register-details {
+    padding: 2rem;
+    width: 60%;
+}
+.register-details form p {
+    margin-top: 3rem;
+}
+.register-details form a {
+    text-decoration: none;
+}
+.registerInput {
+    display: block;
+    width: 90%;
+    border-radius: 100px;
+    border: 2px solid #3d3d3d6c;
+    padding: 9px;
+    text-indent: 15px;
+    background-color: #eeeeee;
+    margin: 1rem auto 1rem auto;
+}
+.registerResidentBtn {
+    display: block;
+    background-color: #006500;
+    border: none;
+    border-radius: 100px;
+    padding: 8px;
+    color: white;
+    width: 90%;
+    margin: 2rem auto 2rem auto;
+    font-size: 18px;
+}
+.loginResidentAccountBtn {
+    display: block;
+    background-color: #3d3d3d;
+    border: none;
+    border-radius: 100px;
+    padding: 8px;
+    color: white;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+}

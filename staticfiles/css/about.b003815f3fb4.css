@@ -1,0 +1,142 @@
+/* Brgy. Officials */
+
+.brgy-officials {
+    max-width: 90%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.brgy-officials h3 {
+    color: white;
+    margin-bottom: 2rem;
+    background-color:#006500;
+    width: 30%;
+    padding: 10px 10px 10px 20px;
+}
+.brgy-captain {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.brgy-captain img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    width: 120px;
+}
+.brgy-captain p:nth-child(2){
+    color: #006500;
+}
+.brgy-councilors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-evenly;
+}
+.brgy-councilors-content {
+    margin: 1rem;
+    padding: 10px;
+}
+.brgy-councilors-content img {
+    width: 70px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.brgy-councilors-content p:nth-child(2) {
+    color: #006500;
+}
+
+/* SK Officials */
+
+.sk-officials {
+    max-width: 90%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.sk-officials h3 {
+    color: white;
+    margin-bottom: 2rem;
+    background-color:#006500;
+    width: 30%;
+    padding: 10px 10px 10px 20px;
+}
+.sk-chairman {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.sk-chairman img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    width: 120px;
+}
+.sk-chairman p:nth-child(2){
+    color: #006500;
+}
+.sk-kagawads {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+}
+.sk-kagawads-content {
+    margin: 1rem;
+    padding: 10px;
+}
+.sk-kagawads-content img {
+    width: 70px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.sk-kagawads-content p:nth-child(2) {
+    color: #006500;
+}
+
+/* Brgy History */
+
+.brgy-history {
+    max-width: 90%;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+.brgy-history h3 {
+    color: white;
+    margin-bottom: 2rem;
+    background-color:#006500;
+    width: 30%;
+    padding: 10px 10px 10px 20px;
+}
+.brgy-history-content p {
+    text-indent: 2rem;
+    margin-left: 2rem;
+}
+.brgy-history-content p img {
+    border-radius: 1rem;
+    float: right;
+    margin: 0 20px 20px 20px;
+}
+
+/* Brgy Statistics */
+
+.brgy-statistics {
+    max-width: 90%;
+    margin-top: 2rem;
+    margin-bottom: 0;
+}
+.brgy-statistics h3 {
+    color: white;
+    margin-bottom: 2rem;
+    background-color:#006500;
+    width: 30%;
+    padding: 10px 10px 10px 20px;
+}
+#donutchart {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+    height: 600px;
+    padding-left: 7rem;
+    
+}

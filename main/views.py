@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 def mainPage(request):
     newsObj = News.objects.all().order_by('-date_created')
-    carouselNews = News.objects.all()[:2]
+    carouselNews = News.objects.all().order_by('-date_created')[:2]
     eventsObj = Events.objects.all().order_by('-date_created')
 
     context = {

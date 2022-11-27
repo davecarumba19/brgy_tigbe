@@ -1,0 +1,19 @@
+.news-events {
+    max-width: 80%;
+    margin: 4rem;
+}
+.news-events-content {
+    display: flex;
+}
+.news-events-content img {
+    border-radius: 1rem;
+    width: 708px;
+    height: 400px;
+    object-fit: cover;
+}
+.news-events-details {
+    margin-left: 2rem;
+}
+.news-events-details h2 {
+    color: #006500;
+}
