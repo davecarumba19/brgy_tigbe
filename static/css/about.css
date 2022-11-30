@@ -22,6 +22,8 @@
     margin-right: auto;
     border-radius: 50%;
     width: 120px;
+    height: 120px;
+    object-fit: cover;
 }
 .brgy-captain p:nth-child(2){
     color: #006500;
@@ -37,10 +39,12 @@
 }
 .brgy-councilors-content img {
     width: 70px;
+    height: 70px;
     border-radius: 50%;
     margin-left: auto;
     margin-right: auto;
     display: block;
+    object-fit: cover;
 }
 .brgy-councilors-content p:nth-child(2) {
     color: #006500;
@@ -70,6 +74,8 @@
     margin-right: auto;
     border-radius: 50%;
     width: 120px;
+    height: 120px;
+    object-fit: cover;
 }
 .sk-chairman p:nth-child(2){
     color: #006500;
@@ -85,10 +91,12 @@
 }
 .sk-kagawads-content img {
     width: 70px;
+    height: 70px;
     border-radius: 50%;
     margin-left: auto;
     margin-right: auto;
     display: block;
+    object-fit: cover;
 }
 .sk-kagawads-content p:nth-child(2) {
     color: #006500;
