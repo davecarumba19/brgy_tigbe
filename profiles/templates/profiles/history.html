@@ -11,7 +11,7 @@
 {% if request.user.id == 1 %}
 <div class="inbox">
         <h2>
-            TOTAL REQUESTS ({{ totalRequest }}) 
+            TOTAL REQUESTS ({{ totalRequest }})
             <span style="float: right; font-size: 20px; background-color: #006500; border-radius: 100px; padding: 10px 20px;">
                 <a href="{% url 'export-data-requests' %}" style="color: white; text-decoration:none;">Download Data</a>
             </span>
@@ -31,7 +31,12 @@
         {% endif %}
         {% endfor %}
     <hr>
-        <h2>TOTAL REPORTS ({{ totalReports }}) <span style="float: right; font-size: 20px; background-color: #006500; border-radius: 100px; padding: 10px 20px;"><a href="{% url 'export-data-reports' %}" style="color: white; text-decoration:none;">Download Data</a></span></h2>
+        <h2>
+            TOTAL REPORTS ({{ totalReports }}) 
+            <span style="float: right; font-size: 20px; background-color: #006500; border-radius: 100px; padding: 10px 20px;">
+                <a href="{% url 'export-data-reports' %}" style="color: white; text-decoration:none;">Download Data</a>
+            </span>
+        </h2>
         {% for report in historyReports %}
         {% if report.hide == True %}
         {% else %}

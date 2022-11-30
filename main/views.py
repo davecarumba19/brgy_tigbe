@@ -68,6 +68,8 @@ def singleEventPage(request, pk):
 
 @login_required(login_url='login')
 def createNews(request):
+    page = 'createNews'
+
     profile = request.user.profiles
     form = NewsForm()
 
@@ -81,12 +83,15 @@ def createNews(request):
 
     context = {
         'form':form,
+        'page':page,
     }
     return render(request, 'main/create-update-news.html', context)
 
 
 @login_required(login_url='login')
 def updateNews(request, pk):
+    page = 'updateNews'
+    
     profile = request.user.profiles
     newsObj = profile.news_set.get(id=pk)
     form = NewsForm(instance=newsObj)
@@ -98,7 +103,9 @@ def updateNews(request, pk):
             return redirect('account')
 
     context = {
-        'form':form, 'newsObj': newsObj,
+        'form':form,
+        'newsObj': newsObj,
+        'page':page,
     }
     return render(request, 'main/create-update-news.html', context)
 
@@ -120,6 +127,9 @@ def deleteNews(request, pk):
 
 @login_required(login_url='login')
 def createEvents(request):
+
+    page = 'createEvents'
+
     profile = request.user.profiles
     form = EventsForm()
 
@@ -133,12 +143,15 @@ def createEvents(request):
 
     context = {
         'form':form,
+        'page':page,
     }   
     return render(request, "main/create-update-events.html", context)
 
 
 @login_required(login_url='login')
 def updateEvents(request, pk):
+    page = 'updateEvents'
+
     profile = request.user.profiles
     eventsObj = profile.events_set.get(id=pk)
     form = EventsForm(instance=eventsObj)
@@ -150,7 +163,8 @@ def updateEvents(request, pk):
             return redirect('account')
 
     context = {
-        'form':form
+        'form':form,
+        'page':page,
     }
     return render(request, 'main/create-update-events.html', context)
 

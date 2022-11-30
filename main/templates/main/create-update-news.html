@@ -1,6 +1,16 @@
 {% extends 'based.html' %}
 
 {% block content %}
+{% if page == 'createNews' %}
+    <div class="banner">
+        <h2 class="fw-bold">CREATE NEWS</h2>
+    </div>
+{% else %}
+    <div class="banner">
+        <h2 class="fw-bold">UPDATE NEWS</h2>
+    </div>
+{% endif %}
+
 <div class="createUpdateEventsNews">
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}

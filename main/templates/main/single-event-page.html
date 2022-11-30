@@ -12,5 +12,8 @@
         </div>
     </div>
 </div>
-{% include "footer.html" %}
+{% if request.user.is_authenticated %}
+{% else %}
+    {% include "footer.html" %}
+{% endif %}
 {% endblock %}
