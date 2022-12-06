@@ -67,8 +67,8 @@
 /* Register */
 
 .register {
-    max-width: 50%;
-    height: 42rem;
+    max-width: 80%;
+    height:fit-content;
     display: flex;
     margin: 4rem auto 4rem auto;
     justify-content: center;
@@ -78,7 +78,7 @@
 .register-content {
     border-radius: 1rem 0 0 1rem;
     background-color: #006500;
-    width: 40%;
+    width: 30%;
 }
 .register-content h2 {
     color: white;
@@ -86,28 +86,56 @@
 }
 .register-content img {
     width: 100%;
-    margin-top: 11.5rem;
+    margin-top: 31rem;
     z-index: 0;
 }
 .register-details {
     padding: 2rem;
-    width: 60%;
+    width: 70%;
+}
+.register-details form {
+    display: flex;
+    flex-wrap: wrap;
 }
 .register-details form p {
-    margin-top: 3rem;
+    margin-top: 1rem;
 }
 .register-details form a {
     text-decoration: none;
+    width: 100%;
 }
 .registerInput {
     display: block;
-    width: 90%;
+    width: 100%;
     border-radius: 100px;
     border: 2px solid #3d3d3d6c;
     padding: 9px;
     text-indent: 15px;
     background-color: #eeeeee;
     margin: 1rem auto 1rem auto;
+}
+.registerInput:nth-child(3), .registerInput:nth-child(6), .registerInput:nth-child(8) {
+    width: 48%;
+    margin: 1rem auto 1rem 0;
+}
+.registerInput:nth-child(4), .registerInput:nth-child(7), .registerInput:nth-child(9) {
+    width: 48%;
+    margin: 1rem 0 1rem auto;
+}
+.register-gender-vaccine {
+    display: flex;
+    justify-content: space-evenly;
+}
+.register-profile {
+    width: 100%;
+}
+.register-village {
+    width: 100%;
+    margin-top: 2rem;
+}
+.register-village label {
+    font-weight: bold;
+    margin-left: 2rem;
 }
 .registerResidentBtn {
     display: block;
@@ -116,19 +144,16 @@
     border-radius: 100px;
     padding: 8px;
     color: white;
-    width: 90%;
+    width: 100%;
     margin: 2rem auto 2rem auto;
     font-size: 18px;
 }
 .loginResidentAccountBtn {
-    display: block;
     background-color: #3d3d3d;
     border: none;
     border-radius: 100px;
     padding: 8px;
     color: white;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
     font-size: 18px;
 }

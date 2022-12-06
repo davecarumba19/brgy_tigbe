@@ -1,22 +1,120 @@
-{% extends 'based.html' %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <title>{{ sendMessage.receiver.first_name }} {{ sendMessage.document_type }}</title>
+    <style>
+        @page {
+            size: letter portrait;
+            @frame content_frame {
+                left: 50pt;
+                width: 512pt;
+                top: 50pt;
+                height: 692pt;    /* for debugging the layout */
+            }
+        }
+    </style>
+</head>
+<body>
+    <table repeat="1">
+        <tr>
+            <th>
+                <img src="static/img/Logo.png" width="100px" height="100px">
+            </th>
+            <th>
+                <p style="margin: 0; font-weight: lighter;">Republic of the Philippines</p>
+                <p style="margin: 0; font-weight: lighter;">Province of Bulacan</p>
+                <p style="margin: 0; font-weight: lighter;">Municipality of Norzagaray</p>
+                <h1 style="margin: 0;">BARANGAY TIGBE</h1>    
+            </th>
+            <th>
+                <img src="static/img/paolo.png" alt="" width="200px">
+            </th>
+        </tr>
+    </table>
+    <br>
+    <hr>
+    <table>
+        <tr style="font-size: 15px;">
+            <th>
+                <br>
+                <h2>OFFICE OF THE PUNONG BARANGAY</h2>
+            </th>
+        </tr>
+        <tr style="font-size: 15px;">
+            <th>
+                <br>
+                <h2>{{ sendMessage.document_type }}</h2>
+            </th>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
+    <table>
+        <tr style="font-size: 15px;">
+            <td>Sa kinuukulan,</td>
+        </tr>
+        <tr style="font-size: 15px;">
+            <td>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pinatutunayan ng Tanggapan ng Punong Barangay ng Tigbe sa pamamagitan lgg. ABC.
+                
+                ALFREDWEL PAUL L. GERMAR and mga sumusunod:
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr style="font-size: 15px;"">
+            <td>
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Si
+                <span style="font-weight: bold;">
+                    {{ sendMessage.receiver.first_name }} {{ sendMessage.receiver.last_name }}, {{ sendMessage.receiver.status }}.
+                </span>
+                Ay Nakatira sa 
+                <span style="font-weight: bold;">
+                    {{ sendMessage.receiver.address }}
+                </span>
+                at sa nayon ng 
+                <span style="font-weight: bold;">
+                    {{ sendMessage.receiver.village }},
+                </span>
+                naparito siya upang humingi ng dokumento para sa kanyang 
+                <span style="font-weight: bold;">
+                    {{ sendMessage.purpose }}.
+                </span>
+            </td>
 
-{% block content %}
-<div class="request-report-message">
-    <h2>
-        <a href="{% url 'inbox' %}"><span><i class="bi bi-arrow-left-circle"></i></span></a>
-        MESSAGE
-    </h2>
-    <div class="message-content">
-        <p>{{ sendMessage.sender.first_name }} {{ sendMessage.sender.last_name }}</p>
-        <p>{{ sendMessage.date_created }}</p>
-        <p>{{ sendMessage.your_message }}</p>
-        {% if sendMessage.your_file %}
-        <p><a href="{{ sendMessage.your_file.url }}">{{ sendMessage.your_file }}</a></p>
-        {% else %}
-        <p><a href="#">No file</a></p>
-        {% endif %}
-    </div>
-</div>
-{% endblock %}
+        </tr>
+    </table>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <table>
+        <tr>
+            <td style="text-align: center;">________________________________________________</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                <h2>
+                    ABC. ALFREDWEL PAUL L. GERMAR
+                </h2>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                    Punong Barangay
+            </td>
+        </tr>
+    </table>
+    
+</body>
+
+</html>

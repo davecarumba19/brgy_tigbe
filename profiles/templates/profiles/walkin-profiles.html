@@ -1,0 +1,27 @@
+{% extends 'based.html' %}
+{% load static %}
+
+{% block content %}
+<div class="banner">
+    <h2 class="fw-bold">RESIDENT: {{ walkInProfiles.first_name }}</h2>
+</div>
+
+<div class="profile-details">
+        <img src="{{ walkInProfiles.profile_image.url }}" alt="">
+        <h4 class="fw-bold"> {{ walkInProfiles.first_name }} {{ walkInProfiles.last_name }}
+            {% if walkInProfiles.verified == False %}
+            {% else %}
+                <i class="bi bi-patch-check-fill" style="color: rgb(64, 147, 255); padding-left:0.5rem; vertical-align:middle;"></i>
+            {% endif %}
+        </h4>
+        <div class="profile-sub-details">
+            <p>{{ walkInProfiles.email }}</p>
+            <p>{{ walkInProfiles.address }}</p>
+            <p>{{ walkInProfiles.status }}</p>
+            <p>{{ walkInProfiles.gender }}</p>
+            <p>{{ walkInProfiles.vaccine }}</p>
+            <p>From {{ walkInProfiles.village }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

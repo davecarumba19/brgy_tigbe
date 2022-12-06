@@ -13,5 +13,6 @@
         <p>{{ requestMessage.date_created }}</p>
         <p>May I request a {{ requestMessage.document_type }} for {{ requestMessage.purpose }}?</p>
     </div>
+    <a href="{% url 'create-message' requestMessage.sender.id %}" class="send-doc">Send Document</a>
 </div>
 {% endblock %}

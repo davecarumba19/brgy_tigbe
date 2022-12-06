@@ -10,6 +10,9 @@
         <div class="request">
             <a href="{% url 'create-events' %}"><i class="bi bi-plus-circle"></i> Create Events</a>
         </div>
+        <div class="create-profile">
+            <a href="{% url 'create-profile' %}"><i class="bi bi-plus-circle"></i> Create Profile</a>
+        </div>
     </div>
 {% else %}
 {% if profile.verified == False %}
@@ -45,7 +48,13 @@
             <img src="{{ profile.profile_image.url }}" alt="">
         </div>
         <div class="account-details">
-            <h4 class="fw-bold"> {{ profile.first_name }} {{ profile.last_name }} <i>@{{profile.username}}</i>
+
+            {% if request.user.id == 1 %}
+            <h4 class="fw-bold" style="margin-top: 3rem;">
+            {% else %}
+            <h4 class="fw-bold">
+            {% endif %}
+                {{ profile.first_name }} {{ profile.last_name }} <i>@{{profile.username}}</i>
                 {% if profile.verified == False %}
                 {% else %}
                 <i class="bi bi-patch-check-fill" style="color: rgb(64, 147, 255); padding-left:0.5rem; vertical-align:middle;"></i>
@@ -54,9 +63,12 @@
             <p><b>Email:</b> {{ profile.email }}</p>
             <p><b>Phone Number:</b>  {{ profile.phone_number }}</p>
             <p><b>Address:</b> {{ profile.address }}</p>
+            {% if request.user.id == 1 %}
+            {% else %}
             <p><b>Status:</b> {{ profile.status }}</p>
             <p><b>Gender:</b> {{ profile.gender }}</p>
             <p><b>Vaccine Status:</b> {{ profile.vaccine }}</p>
+            {% endif %}
         </div>
     </div>
     <div class="time-edit-account">

@@ -28,21 +28,51 @@ function showTime(){
  
 showTime();
 
-function drawChart() {
+function drawChart1() {
     var data = google.visualization.arrayToDataTable([
       ['Population', 'Number People'],
       ['Male',     11859],
       ['Female',      11829],
-      ['Children',  5920],
-      ['Senior Citizens', 5919],
+    ]);
+
+    var options = {
+      title: 'GENDER',
+      pieHole: 0.4,
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('donutchart1'));
+    chart.draw(data, options);
+  }
+
+  function drawChart2() {
+    var data = google.visualization.arrayToDataTable([
+      ['Population', 'Number People'],
+      ['Non-Voters', 3799],
       ['Voters',    19889]
     ]);
 
     var options = {
-      title: 'Total Population of Barangay Tigbe: 23,688',
+      title: 'VOTERS',
       pieHole: 0.4,
     };
 
-    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+    var chart = new google.visualization.PieChart(document.getElementById('donutchart2'));
+    chart.draw(data, options);
+  }
+
+  function drawChart3() {
+    var data = google.visualization.arrayToDataTable([
+      ['Population', 'Number People'],
+      ['Children (17 Below)',  5920],
+      ['Senior Citizens (60 Up)', 5919],
+      ['Adult (18 - 59)',    11849]
+    ]);
+
+    var options = {
+      title: 'AGE',
+      pieHole: 0.4,
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('donutchart3'));
     chart.draw(data, options);
   }

@@ -13,6 +13,13 @@ def createProfile(sender, instance, created, **kwargs):
             first_name=user.first_name,
             last_name=user.last_name,
             email=user.email,
+            phone_number=user.phone_number,
+            address=user.address,
+            status=user.status,
+            gender=user.gender,
+            vaccine=user.vaccine,
+            village=user.village,
+            profile_image=user.profile_image,
         )
 
 

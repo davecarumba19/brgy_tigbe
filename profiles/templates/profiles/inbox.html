@@ -11,6 +11,7 @@
 </div>
 {% if request.user.id == 1 %}
 <div class="inbox">
+    <div class="req">
         <h2>REQUESTS ({{ unreadCountDocument }})</h2>
         {% for request in requestDocument %}
         <div class="message-link">
@@ -25,7 +26,8 @@
             </a>
         </div>
         {% endfor %}
-    <hr>
+    </div>
+    <div class="rep">
         <h2>REPORTS ({{ unreadCountReport }})</h2>
         {% for report in reportConcern %}
         <div class="message-link">
@@ -40,7 +42,8 @@
             </a>
         </div>
         {% endfor %}
-    <hr>
+    </div>
+    <div class="ver">
         <h2>VERIFICATIONS ({{ unreadVerification }})</h2>
         {% for verify in verifyMessage %}
         <div class="message-link">
@@ -55,9 +58,12 @@
             </a>
         </div>
         {% endfor %}
+    </div>
 </div>
     {% else %}
 <div class="inbox">
+<div class="req">
+
     <h2>MESSAGES({{ unreadMessage }})</h2>
      {% for message in sendMessage %}
         <div class="message-link">
@@ -67,11 +73,12 @@
                 {% else %}
                     <p>
                 {% endif %}
-                        {{ message.sender.first_name }}'s message | {{ message.date_created }}
+                        {{ message.sender.first_name }} {{ message.sender.last_name }}'s message | {{ message.date_created }}
                     </p>
             </a>
         </div>
     {% endfor %}
+</div>
 </div>
 {% endif %}
 {% endblock %}

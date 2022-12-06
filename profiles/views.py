@@ -7,13 +7,16 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 
 from django.contrib import messages
-from .models import Profiles, Requests, Reports, Verificationss
+from .models import Profiles, Requests, Reports, Verificationss, WalkInProfiles
 from main.models import News, Events
-from .forms import CustomUserCreationForm, ProfileForm, ReportsForm, RequestsForm, MessageForm, VerificationForm, VerifyProfileForm
+from .forms import CustomUserCreationForm, ProfileForm, ReportsForm, RequestsForm, MessageForm, VerificationForm, VerifyProfileForm, WalkInProfileForm
 
 from .resources import RequestResource, ReportResource
 from django.http import HttpResponse
 from tablib import Dataset
+
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
 # Create your views here.
 
@@ -52,10 +55,26 @@ def registerUser(request):
     form = CustomUserCreationForm()
 
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST, request.FILES)
+
+        phone_number = request.POST['phone_number']
+        address = request.POST['address']
+        status = request.POST['status']
+        gender = request.POST['gender']
+        vaccine = request.POST['vaccine']
+        village = request.POST['village']
+        profile_image = request.FILES['profile_image']
+
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
+            user.phone_number = phone_number
+            user.address = address
+            user.status = status
+            user.gender = gender
+            user.vaccine = vaccine
+            user.village = village
+            user.profile_image = profile_image
             user.save()
 
             messages.success(request, 'User has been created!')
@@ -84,6 +103,16 @@ def userProfile(request, pk):
         'profile': profile,
     }
     return render(request, 'profiles/profiles.html', context)
+
+
+@login_required(login_url='login')
+def userProfileWalkIn(request, pk):
+    walkInProfiles = WalkInProfiles.objects.get(id=pk)
+
+    context = {
+        'walkInProfiles':walkInProfiles,
+    }
+    return render(request, 'profiles/walkin-profiles.html', context)
 
 @login_required(login_url='login')
 def userAccount(request):
@@ -125,11 +154,26 @@ def searchAccount(request):
     
     profiles = Profiles.objects.filter(
         Q(first_name__icontains=search_account) |
-        Q(id__icontains=search_account)
+        Q(id__icontains=search_account) |
+        Q(village__icontains=search_account)
+        )
+
+    profile1 = Profiles.objects.filter(village__icontains=search_account, verified=True).count()
+    profile2 = WalkInProfiles.objects.filter(village__icontains=search_account).count()
+    
+    totalProfile = profile1 + profile2
+
+    walkInProfiles = WalkInProfiles.objects.filter(
+        Q(first_name__icontains=search_account) |
+        Q(id__icontains=search_account) |
+        Q(village__icontains=search_account)
         )
 
     context = {
-        'profiles':profiles
+        'profiles':profiles,
+        'walkInProfiles':walkInProfiles,
+        'totalProfile':totalProfile,
+        'search_account':search_account,
     }
     return render(request, 'profiles/search-account.html', context)
 
@@ -342,12 +386,15 @@ def verified(request, pk):
     if request.method == 'POST':
         form = VerifyProfileForm(request.POST, instance=profile)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.verified = True
+            user.save()
 
             return redirect('account')
 
     context = {
         'form':form,
+        'profile':profile,
     }
     return render(request, 'profiles/verified.html', context)
 
@@ -383,11 +430,24 @@ def viewMessage(request, pk):
     if sendMessage.is_read == False:
         sendMessage.is_read = True
         sendMessage.save()
+    
+    template_path = 'profiles/view-message.html'
+    context = {'sendMessage': sendMessage}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="document.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
 
-    context = {
-        'sendMessage':sendMessage
-    }
-    return render(request, 'profiles/view-message.html', context)
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+    # if error then show some funny view
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
 
 
 @login_required(login_url='login')
@@ -513,3 +573,22 @@ def deleteReport(request, pk):
         'Obj': reportObj,
     }
     return render(request, 'profiles/delete-template.html', context)
+
+
+@login_required(login_url='login')
+def createProfile(request):
+    profile = request.user.profiles
+    form = WalkInProfileForm()
+
+    if request.method == 'POST':
+        form = WalkInProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.created_by = profile
+            user.save()
+            return redirect('account')
+
+    context = {
+        'form':form,
+    }
+    return render(request, 'profiles/create-profile.html', context)

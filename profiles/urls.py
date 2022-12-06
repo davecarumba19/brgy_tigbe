@@ -10,6 +10,7 @@ urlpatterns = [
     path('login-admin/', views.loginAdmin, name='login-admin'),
 
     path('profile/<str:pk>', views.userProfile, name='user-profile'),
+    path('profile-walkin/<str:pk>', views.userProfileWalkIn, name='user-profile-walkin'),
     path('account/', views.userAccount, name='account'),
     path('edit-account/', views.editAccount, name='edit-account'),
     path('search-account/', views.searchAccount, name='search-account'),
@@ -37,4 +38,6 @@ urlpatterns = [
 
     path('delete-request/<str:pk>', views.deleteRequest, name='delete-request'),
     path('delete-report/<str:pk>', views.deleteReport, name='delete-report'),
+
+    path('create-profile/', views.createProfile, name='create-profile')
 ]

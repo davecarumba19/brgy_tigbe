@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="banner">
-    <h2 class="fw-bold">DO YOU WANT TO VERIFY THE ACCOUNT?</h2>
+    <h2 class="fw-bold">VERIFICATION</h2>
 </div>
 
 <div class="request-document">
@@ -12,7 +12,7 @@
         {% for labels in form %}
             {{labels}}
         {% endfor %}
-    
+        <h3 class="mb-4 text-center">Do you want to verify {{ profile.first_name }} {{ profile.last_name }}</h3>
         <a href="{% url 'account' %}">
             <input type="button" value="Cancel" class="requestDocumentCancelBtn">
         </a>

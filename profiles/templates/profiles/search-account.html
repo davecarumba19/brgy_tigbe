@@ -8,12 +8,29 @@
         <div class="searchAccount">
             <form action="{% url 'search-account' %}" method="get">
                 <input type="search" name="searchAccount" id="" class="searchInput" placeholder="Search Resident">
+                <div>
+                    <select name="searchAccount" id="">
+                        <option value="">Search by Village</option>
+                        <option value="Crisville">Crisville</option>
+                        <option value="Gulod">Gulod</option>
+                        <option value="Matandang Barrio">Matandang Barrio</option>
+                        <option value="Mataas na Kahoy">Mataas na Kahoy</option>
+                        <option value="Katuparan">Katuparan</option>
+                        <option value="Kaypiskal">Kaypiskal</option>
+                        <option value="Sulucan">Sulucan</option>
+                        <option value="NHV">NHV</option>
+                    </select>
+                </div>
                 <input type="submit" value="Search" class="searchBtn">
             </form>
         </div>
     </div>
     
 
+
+    <div style="margin-top: 3rem;">
+      <h4 style="text-align: center; color: #9e9e9e;">{{ search_account }} Total Verified Residents: {{ totalProfile }}</h4>
+    </div>
 <div class="contents">
     <div class="search-profiles">
         {% for profile in profiles %}
@@ -28,6 +45,22 @@
               </h5>
               <p class="card-text text-center">@{{ profile.username }}</p>
               <a href="{% url 'user-profile' profile.id %}" class="btn" style="background-color: #006500; color: white;">Visit Resident</a>
+            </div>
+          </div>
+        {% endfor %}
+
+        {% for walkInProfile in walkInProfiles %}
+        <div class="card m-4" style="width: 18rem;">
+            <div class="card-body ms-auto me-auto w-100">
+                <img src="{{ walkInProfile.profile_image.url }}" alt="">
+              <h5 class="card-title text-center">{{ walkInProfile.first_name }} {{ walkInProfile.last_name }}
+                {% if walkInProfile.verified == False %}
+                {% else %}
+                <i class="bi bi-patch-check-fill" style="color: rgb(64, 147, 255); padding-left:0.5rem; vertical-align:middle;"></i>
+                {% endif %}
+              </h5>
+              <p class="card-text text-center">{{ walkInProfile.email }}</p>
+              <a href="{% url 'user-profile-walkin' walkInProfile.id %}" class="btn" style="background-color: #006500; color: white;">Visit Resident</a>
             </div>
           </div>
         {% endfor %}

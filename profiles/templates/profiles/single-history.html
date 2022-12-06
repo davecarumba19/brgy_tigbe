@@ -9,6 +9,7 @@
     </a>
 </div>
 <div class="inbox">
+    <div class="req">
         <h2>TOTAL REQUESTS ({{ singleTotalRequest }})</h2>
         {% for single_request in singleHistoryRequest %}
         <div class="message-link">
@@ -19,7 +20,8 @@
             </a>
         </div>
         {% endfor %}
-    <hr>
+    </div>
+    <div class="rep">
         <h2>TOTAL REPORTS ({{ singleTotalReports }})</h2>
         {% for single_report in singleHistoryReports %}
         <div class="message-link">
@@ -30,4 +32,6 @@
             </a>
         </div>
         {% endfor %}
+
+    </div>
 {% endblock %}

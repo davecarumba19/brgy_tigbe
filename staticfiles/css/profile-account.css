@@ -137,12 +137,11 @@
     border: #696969 1px solid;
     border-radius: 1rem;
 }
-.editUpdateAccount form label, .editUpdateAccount form input:nth-child(7), br {
-    display: none;
-}
-.editUpdateAccount form p:nth-child(5) label, .editUpdateAccount form p:nth-child(6) label, .editUpdateAccount form p:nth-child(7) label {
-    display: block;
+.editUpdateAccount label{
     margin-left: 1rem;
+}
+.editUpdateAccount form p:nth-child(9) br, .editUpdateAccount form p:nth-child(9) label:nth-child(4) {
+    display: none;
 }
 .editUpdateAccountInput {
     display: block;
@@ -171,6 +170,19 @@
     margin-left: auto;
     margin-top: -1px;
 }
+.searchAccount form {
+    display: flex;
+}
+.searchAccount form div {
+    margin: 0 2rem 0 2rem;
+}
+.searchAccount form div select {
+    border-radius: 100px;
+    width: 15rem;
+    border: none;
+    padding: 10px;
+    text-indent: 10px;
+}
 .searchInput {
     border-radius: 100px;
     width: 20rem;
@@ -180,11 +192,16 @@
 }
 .searchBtn {
     border-radius: 100px;
+    border: none;
     width: 8rem;
-    padding: 7px;
+    padding: 9px;
     background-color: white;
     color: #006500;
     font-weight: bold;
+}
+.searchBtn:hover {
+    background-color:#006500;
+    color: white;
 }
 
 .contents {
@@ -225,10 +242,10 @@
 .report {
     float: right;
 }
-.report, .request {
+.report, .request, .create-profile {
     margin: 3rem 0 3rem 0;
 }
-.report a, .request a{
+.report a, .request a,  .create-profile a {
     background-color: #3d3d3d;
     color: white;
     padding: 1rem;
@@ -237,7 +254,7 @@
     transition: 0.3s;
     border: 1px #3d3d3d solid;
 }
-.report a:hover, .request a:hover {
+.report a:hover, .request a:hover,  .create-profile a:hover {
     background-color: white;
     border: 1px black solid;
     color: #006500;
@@ -369,11 +386,18 @@
 /* Inbox */
 
 .inbox {
-    max-width: 60%;
+    max-width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 2rem;
+}
+.req, .rep, .ver {
     background-color: #eeeeee;
-    margin: 3rem auto 3rem auto;
-    padding: 2rem;
+    width: 100%;
+    margin: 1rem;
+    padding: 1.6rem;
     border-radius: 1rem;
+    height: fit-content;
 }
 .message-link {
     background-color: white;
@@ -395,6 +419,20 @@
     border-radius: 1rem;
     padding: 2rem;
     margin: 3rem auto 3rem auto;
+}
+.send-doc {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #006500;
+    padding: 10px 15px;
+    border-radius: 50px;
+    color: white;
+    margin: 2rem 0 0 2.5rem;
+    transition: 0.3s;
+}
+.send-doc:hover {
+    color: white;
+    background-color: #3d3d3d;
 }
 .message-content {
     margin-left: 2.5rem;
@@ -460,6 +498,44 @@
     border-radius: 100px;
 }
 .sendMessageCancelBtn {
+    width: 30%;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 100px;
+}
+
+/* Create Profile for Walk In */
+.createProfileWalkIn {
+    max-width: 40%;
+    margin: 2rem auto 2rem auto;
+    padding: 2rem;
+    border: #696969 1px solid;
+    border-radius: 1rem;
+}
+.createProfileWalkIn label{
+    margin-left: 1rem;
+}
+.createProfileWalkInInput {
+    display: block;
+    margin-bottom: 2rem;
+    width: 100%;
+    padding: 10px;
+    border-radius: 100px;
+    border: 2px solid #696969;
+    text-indent: 10px;
+}
+.createProfileWalkInSubmitBtn {
+    width: 30%;
+    background-color: #006500;
+    color: white;
+    float: right;
+    border: none;
+    padding: 10px;
+    border-radius: 100px;
+}
+.createProfileWalkInCancelBtn {
     width: 30%;
     background-color: red;
     color: white;
