@@ -65,7 +65,7 @@
             <p><b>Address:</b> 
             {% if request.user.id == 1 %}
             {% else %}
-            Blk/Unit {{ profile.blk_unit }} Phase/Street {{ profile.phase_street }}, 
+            {{ profile.blk_unit }} {{ profile.phase_street }}, 
             {% endif %}
             Brgy.Tigbe</p>
             {% if request.user.id == 1 %}
