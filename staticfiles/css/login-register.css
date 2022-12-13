@@ -86,7 +86,7 @@
 }
 .register-content img {
     width: 100%;
-    margin-top: 31rem;
+    margin-top: 54rem;
     z-index: 0;
 }
 .register-details {
@@ -114,24 +114,36 @@
     background-color: #eeeeee;
     margin: 1rem auto 1rem auto;
 }
-.registerInput:nth-child(3), .registerInput:nth-child(6), .registerInput:nth-child(8) {
+.registerInput:nth-child(11) {
+    margin-top: 5px;
+}
+ .registerInput:nth-child(6) {
     width: 48%;
     margin: 1rem auto 1rem 0;
 }
-.registerInput:nth-child(4), .registerInput:nth-child(7), .registerInput:nth-child(9) {
+.registerInput:nth-child(7), .registerInput:nth-child(9) {
     width: 48%;
+    margin: 1rem 0 1rem auto;
+}
+.registerInput:nth-child(3) {
+    width: 70%;
+    margin: 1rem auto 1rem 0;
+}
+.registerInput:nth-child(4) {
+    width: 26%;
     margin: 1rem 0 1rem auto;
 }
 .register-gender-vaccine {
     display: flex;
     justify-content: space-evenly;
+    margin-bottom: 1rem;
 }
 .register-profile {
     width: 100%;
 }
 .register-village {
     width: 100%;
-    margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 .register-village label {
     font-weight: bold;

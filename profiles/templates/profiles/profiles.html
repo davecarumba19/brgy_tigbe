@@ -16,7 +16,11 @@
         </h4>
         <div class="profile-sub-details">
             <p>{{ profile.email }}</p>
-            <p>{{ profile.address }}</p>
+            {% if request.user.id == 1 %}
+            <p>Brgy. Tigbe</p>
+            {% else %}
+            <p>Blk/Unit {{ profile.blk_unit }} Phase{{ profile.phase_street }}, Brgy. Tigbe</p>
+            {% endif %}
             <p>{{ profile.status }}</p>
             <p>{{ profile.gender }}</p>
             <p>{{ profile.vaccine }}</p>

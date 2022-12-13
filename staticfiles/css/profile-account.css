@@ -243,7 +243,7 @@
     float: right;
 }
 .report, .request, .create-profile {
-    margin: 3rem 0 3rem 0;
+    margin: 3rem 0.5rem 3rem 0.5rem;
 }
 .report a, .request a,  .create-profile a {
     background-color: #3d3d3d;
@@ -462,6 +462,23 @@
     background-color: #3d3d3d;
     color: white;
 }
+.verifyBtn {
+    width: fit-content;
+    display: block;
+    font-weight: normal;
+    background-color: #006500;
+    color: white;
+    padding: 1rem 2rem;
+    margin-left: 2.5rem;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    border-radius: 2rem;
+    transition: 0.3s;
+}
+.verifyBtn:hover {
+    background-color: #3d3d3d;
+    color: white;
+}
 
 .sendMessage {
     max-width: 40%;
@@ -485,6 +502,15 @@
     width: 100%;
     padding: 10px;
     border-radius: 100px;
+    border: 2px solid #696969;
+    text-indent: 10px;
+}
+.sendMessageInput2 {
+    display: block;
+    margin-bottom: 2rem;
+    width: 100%;
+    padding: 10px;
+    border-radius: 1rem;
     border: 2px solid #696969;
     text-indent: 10px;
 }

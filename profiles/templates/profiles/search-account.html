@@ -44,7 +44,7 @@
                 {% endif %}
               </h5>
               <p class="card-text text-center">@{{ profile.username }}</p>
-              <a href="{% url 'user-profile' profile.id %}" class="btn" style="background-color: #006500; color: white;">Visit Resident</a>
+              <a href="{% url 'user-profile' profile.id %}" class="btn" style="background-color: #006500; color: white;">View Profile</a>
             </div>
           </div>
         {% endfor %}
@@ -60,7 +60,7 @@
                 {% endif %}
               </h5>
               <p class="card-text text-center">{{ walkInProfile.email }}</p>
-              <a href="{% url 'user-profile-walkin' walkInProfile.id %}" class="btn" style="background-color: #006500; color: white;">Visit Resident</a>
+              <a href="{% url 'user-profile-walkin' walkInProfile.id %}" class="btn" style="background-color: #006500; color: white;">View Profile</a>
             </div>
           </div>
         {% endfor %}

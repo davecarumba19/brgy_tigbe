@@ -6,7 +6,7 @@
 <div class="banner">
     <h2 class="fw-bold">INBOX</h2>
     <a href="{% url 'search-account' %}">
-        <input type="button" value="Search Account">
+        <input type="button" value="Resident List">
     </a>
 </div>
 {% if request.user.id == 1 %}
@@ -14,6 +14,8 @@
     <div class="req">
         <h2>REQUESTS ({{ unreadCountDocument }})</h2>
         {% for request in requestDocument %}
+        {% if request.done == True %}
+        {% else %}
         <div class="message-link">
             <a href="{% url 'request-message' request.id %}">
                 {% if request.is_read == False %}
@@ -23,13 +25,17 @@
                 {% endif %}
                         {{ request.sender.first_name }} | {{ request.document_type }} request | {{ request.date_created }}
                     </p>
+                    <a href="{% url 'done-request' request.id %}" style="text-decoration: none; color:#006500; font-weight:bold;">Mark As Done</a>
             </a>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
     <div class="rep">
         <h2>REPORTS ({{ unreadCountReport }})</h2>
         {% for report in reportConcern %}
+        {% if report.done == True %}
+        {% else %}
         <div class="message-link">
             <a href="{% url 'report-message' report.id %}">
                 {% if report.is_read == False %}
@@ -39,13 +45,17 @@
                 {% endif %}
                         {{ report.sender.first_name }}'s report | {{ report.date_created }}
                     </p>
+                    <a href="{% url 'done-report' report.id %}" style="text-decoration: none; color:#006500; font-weight:bold;">Mark As Done</a>
             </a>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
     <div class="ver">
         <h2>VERIFICATIONS ({{ unreadVerification }})</h2>
         {% for verify in verifyMessage %}
+        {% if verify.done == True %}
+        {% else %}
         <div class="message-link">
             <a href="{% url 'verify-message' verify.id %}">
                 {% if verify.is_read == False %}
@@ -55,8 +65,10 @@
                 {% endif %}
                         {{ verify.sender.first_name }}'s verification account | {{ verify.date_created }}
                     </p>
+                    <a href="{% url 'done-ver' verify.id %}" style="text-decoration: none; color:#006500; font-weight:bold;">Mark As Done</a>
             </a>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
 </div>
@@ -74,6 +86,22 @@
                     <p>
                 {% endif %}
                         {{ message.sender.first_name }} {{ message.sender.last_name }}'s message | {{ message.date_created }}
+                    </p>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+<div class="ver">
+    <h2>VERIFICATION MESSAGES({{ unreadVerifySendMessage }})</h2>
+    {% for messages in verifySendMessage %}
+        <div class="message-link">
+            <a href="{% url 'send-view-message' messages.id %}">
+                {% if messages.is_read == False %}
+                    <p style="font-weight: bold;">
+                {% else %}
+                    <p>
+                {% endif %}
+                        {{ messages.sender.first_name }} {{ messages.sender.last_name }}'s message | {{ messages.date_created }}
                     </p>
             </a>
         </div>

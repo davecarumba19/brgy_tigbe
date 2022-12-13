@@ -38,26 +38,19 @@
                 {% endfor %}
 
                 <input type="text" placeholder="Phone Number ex.09123456789" name="phone_number" id="" maxlength="11" class="registerInput" required>
-                <input type="text" placeholder="Enter Status ex.Single" name="status" id="" class="registerInput" required>
-                <input type="text" placeholder="Enter Address" name="address" id="" class="registerInput" required>
-                
-                
-                <div class="register-gender-vaccine">
-                    <div>
-                        <p style="font-weight: bold; margin:0 0 0 2rem;">Gender:</p>
-                        <input type="radio" name="gender" id="" value="Male" style="margin-left: 2rem;" required>
-                        <label for="Male">Male</label><br>
-                        <input type="radio" name="gender" id="" value="Female" style="margin-left: 2rem;" required>
-                        <label for="Female">Female</label><br>
-                    </div>
-                    <div>
-                        <p style="font-weight: bold; margin:0 0 0 2rem;">Vaccine:</p>
-                        <input type="radio" name="vaccine" id="" value="Vaccinated" style="margin-left: 2rem;" required>
-                        <label for="Vaccinated">Vaccinated</label><br>
-                        <input type="radio" name="vaccine" id="" value="Not Vaccinated" style="margin-left: 2rem;" required>
-                        <label for="Not Vacinnated">Not Vaccinated</label><br>
-                    </div>
+                <div class="register-village">
+                    <label for="status">Status:</label>
+                        <select name="status" class="registerInput" style="margin-top: 5px;">
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                            <option value="Separated">Separated</option>
+                            <option value="Divorced">Divorced</option>
+                            <option value="Widowed">Widowed</option>
+                        </select>
                 </div>
+                <p style="font-weight: bold; margin:0 0 0 2rem;">Address:</p>
+                <input type="text" placeholder="Enter Blk/Unit" name="blk_unit" id="" class="registerInput" required>
+                <input type="text" placeholder="Enter Phase/Street" name="phase_street" id="" class="registerInput" required>
                 
                 <div class="register-village">
                     <label for="village">Choose Village:</label>
@@ -72,6 +65,22 @@
                             <option value="NHV">NHV</option>
                         </select>
                 </div>
+                <div class="register-village">
+                    <label for="gender">Choose Gender:</label>
+                        <select name="gender" class="registerInput" style="margin-top: 5px;">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                </div>
+                <div class="register-village">
+                    <label for="vaccine">Are you Vaccinated?:</label>
+                        <select name="vaccine" class="registerInput" style="margin-top: 5px;">
+                            <option value="Vaccinated">Vaccinated</option>
+                            <option value="Not Vaccinated">Not Vaccinated</option>
+                        </select>
+                </div>
+                
+                
 
                 <div class="register-profile">
                     <label for="profile_image" style="font-weight: bold; margin:1rem 0 0 2rem;">Upload Profile Picture:</label>

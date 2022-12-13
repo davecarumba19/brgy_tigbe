@@ -15,6 +15,10 @@
         <p style=" margin: 0px;""><span style="font-weight: bold;">Address: </span>{{ verifyMessage.address }}</p>
         <p style="font-weight:bold; margin: 0px;">Barangay I.D.:</p>
         <img src="{{ verifyMessage.brgy_id.url }}" alt="" srcset="" style="width: 300px; height:auto; object-fit:cover; margin-bottom:2rem;">
+        
     </div>
+    
+    <a href="{% url 'verified' verifyMessage.sender.id %}" class="verifyBtn">Verify Account</a>
+    <a href="{% url 'send-message' verifyMessage.sender.id %}" class="verifyBtn">Send Message</a>
 </div>
 {% endblock %}

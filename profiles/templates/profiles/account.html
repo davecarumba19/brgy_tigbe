@@ -34,7 +34,7 @@
     <h2 class="fw-bold">WELCOME TIGBEÑO, {{ profile.first_name }}</h2>
 {% endif %}
     <a href="{% url 'search-account' %}">
-        <input type="button" value="Search Account">
+        <input type="button" value="Resident List">
     </a>
 </div>
 
@@ -62,7 +62,12 @@
             </h4>
             <p><b>Email:</b> {{ profile.email }}</p>
             <p><b>Phone Number:</b>  {{ profile.phone_number }}</p>
-            <p><b>Address:</b> {{ profile.address }}</p>
+            <p><b>Address:</b> 
+            {% if request.user.id == 1 %}
+            {% else %}
+            Blk/Unit {{ profile.blk_unit }} Phase/Street {{ profile.phase_street }}, 
+            {% endif %}
+            Brgy.Tigbe</p>
             {% if request.user.id == 1 %}
             {% else %}
             <p><b>Status:</b> {{ profile.status }}</p>

@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Profiles, Reports, Requests, Messages, Verificationss, WalkInProfiles
+from .models import Profiles, Reports, Requests, Messages, SendMessages, Verificationss, WalkInProfiles
 from django import forms
 
 
@@ -13,8 +13,8 @@ class CustomUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({'placeholder':'Enter Username', 'class':'registerInput', 'required':'required'})
-        self.fields['first_name'].widget.attrs.update({'placeholder':'Enter First Name ex.John', 'class':'registerInput', 'required':'required'})
-        self.fields['last_name'].widget.attrs.update({'placeholder':'Enter Last Name ex.Bual', 'class':'registerInput', 'required':'required'})
+        self.fields['first_name'].widget.attrs.update({'placeholder':'Enter Full Name ex.John Paul M. Bual', 'class':'registerInput', 'required':'required'})
+        self.fields['last_name'].widget.attrs.update({'placeholder':'Enter Suffix ex.Jr.', 'class':'registerInput'})
         self.fields['email'].widget.attrs.update({'placeholder':'Enter Email ex.john@email.com', 'class':'registerInput'})
         self.fields['password1'].widget.attrs.update({'placeholder':'Enter Password ex.Akosijohn12345', 'class':'registerInput', 'required':'required'})
         self.fields['password2'].widget.attrs.update({'placeholder':'Confirm Password', 'class':'registerInput', 'required':'required'})
@@ -23,12 +23,13 @@ class CustomUserCreationForm(UserCreationForm):
 class ProfileForm(ModelForm):
     class Meta:
         model = Profiles
-        fields = ['email','phone_number', 'address', 'status', 'gender', 'vaccine', 'village', 'profile_image']
+        fields = ['email','phone_number', 'blk_unit', 'phase_street', 'status', 'gender', 'vaccine', 'village', 'profile_image']
 
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
         self.fields['email'].widget.attrs.update({'placeholder':'Edit Email', 'class':'editUpdateAccountInput'})
-        self.fields['address'].widget.attrs.update({'placeholder':'Edit Address', 'class':'editUpdateAccountInput'})
+        self.fields['blk_unit'].widget.attrs.update({'placeholder':'Edit Blk/Unit', 'class':'editUpdateAccountInput'})
+        self.fields['phase_street'].widget.attrs.update({'placeholder':'Edit Phase/Street', 'class':'editUpdateAccountInput'})
         self.fields['status'].widget.attrs.update({'placeholder':'Edit Status', 'class':'editUpdateAccountInput'})
         self.fields['gender'].widget.attrs.update({'class':'editUpdateAccountInput'})
         self.fields['vaccine'].widget.attrs.update({'class':'editUpdateAccountInput'})
@@ -70,14 +71,23 @@ class MessageForm(ModelForm):
         self.fields['purpose'].widget.attrs.update({'placeholder':'Enter Purpose','class':'sendMessageInput'})
 
 
+class SendMessageForm(ModelForm):
+    class Meta:
+        model = SendMessages
+        fields = ['message']
+
+    def __init__(self, *args, **kwargs):
+        super(SendMessageForm, self).__init__(*args, **kwargs)
+        self.fields['message'].widget.attrs.update({'placeholder':'Enter Message','class':'sendMessageInput2'})
+
+
 class VerificationForm(ModelForm):
     class Meta:
         model = Verificationss
-        fields = ['address', 'brgy_id']
+        fields = ['brgy_id']
 
     def __init__(self, *args, **kwargs):
         super(VerificationForm, self).__init__(*args, **kwargs)
-        self.fields['address'].widget.attrs.update({'placeholder':'Enter Address' ,'class':'verificationInput', 'required':'required'})
         self.fields['brgy_id'].widget.attrs.update({'class':'verificationInput', 'required':'required'})
         self.fields['brgy_id'].label = "Upload your Barangay I.D.:"
 
@@ -95,13 +105,14 @@ class VerifyProfileForm(ModelForm):
 class WalkInProfileForm(ModelForm):
     class Meta:
         model = WalkInProfiles
-        fields = ['first_name','last_name','address','email','phone_number','status','gender','vaccine','verified','village','profile_image']
+        fields = ['first_name','last_name','blk_unit','phase_street','email','phone_number','status','gender','vaccine','verified','village','profile_image']
 
     def __init__(self, *args, **kwargs):
         super(WalkInProfileForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].widget.attrs.update({'placeholder':'First Name', 'class':'createProfileWalkInInput'})
         self.fields['last_name'].widget.attrs.update({'placeholder':'Last Name', 'class':'createProfileWalkInInput'})
-        self.fields['address'].widget.attrs.update({'placeholder':'Enter Address', 'class':'createProfileWalkInInput'})
+        self.fields['blk_unit'].widget.attrs.update({'placeholder':'Enter Blk/Unit', 'class':'createProfileWalkInInput'})
+        self.fields['phase_street'].widget.attrs.update({'placeholder':'Enter Phase/Street', 'class':'createProfileWalkInInput'})
         self.fields['email'].widget.attrs.update({'placeholder':'Enter Email', 'class':'createProfileWalkInInput'})
         self.fields['phone_number'].widget.attrs.update({'placeholder':'Enter Phone Number', 'class':'createProfileWalkInInput'})
         self.fields['status'].widget.attrs.update({'placeholder':'Enter Status', 'class':'createProfileWalkInInput'})

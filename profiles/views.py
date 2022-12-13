@@ -9,7 +9,7 @@ from django.db.models import Q
 from django.contrib import messages
 from .models import Profiles, Requests, Reports, Verificationss, WalkInProfiles
 from main.models import News, Events
-from .forms import CustomUserCreationForm, ProfileForm, ReportsForm, RequestsForm, MessageForm, VerificationForm, VerifyProfileForm, WalkInProfileForm
+from .forms import CustomUserCreationForm, ProfileForm, ReportsForm, RequestsForm, MessageForm, SendMessageForm, VerificationForm, VerifyProfileForm, WalkInProfileForm
 
 from .resources import RequestResource, ReportResource
 from django.http import HttpResponse
@@ -58,7 +58,8 @@ def registerUser(request):
         form = CustomUserCreationForm(request.POST, request.FILES)
 
         phone_number = request.POST['phone_number']
-        address = request.POST['address']
+        blk_unit = request.POST['blk_unit']
+        phase_street = request.POST['phase_street']
         status = request.POST['status']
         gender = request.POST['gender']
         vaccine = request.POST['vaccine']
@@ -69,7 +70,8 @@ def registerUser(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.phone_number = phone_number
-            user.address = address
+            user.blk_unit = blk_unit
+            user.phase_street = phase_street
             user.status = status
             user.gender = gender
             user.vaccine = vaccine
@@ -216,10 +218,12 @@ def inbox(request):
     requestDocument = profile.request.all()
     reportConcern = profile.report.all()
     sendMessage = profile.message.all()
+    verifySendMessage = profile.send_message.all()
     verifyMessage = profile.verification.all()
     unreadCountDocument = requestDocument.filter(is_read=False).count()
     unreadCountReport = reportConcern.filter(is_read=False).count()
     unreadMessage = sendMessage.filter(is_read=False).count()
+    unreadVerifySendMessage = verifySendMessage.filter(is_read=False).count()
     unreadVerification = verifyMessage.filter(is_read=False).count()
 
     context = {
@@ -227,9 +231,11 @@ def inbox(request):
         'reportConcern': reportConcern,
         'sendMessage': sendMessage,
         'verifyMessage': verifyMessage,
+        'verifySendMessage': verifySendMessage,
         'unreadCountDocument': unreadCountDocument,
         'unreadCountReport': unreadCountReport,
         'unreadMessage': unreadMessage,
+        'unreadVerifySendMessage': unreadVerifySendMessage,
         'unreadVerification': unreadVerification,
         'profile': profile,
     }
@@ -318,7 +324,7 @@ def reportConcern(request):
             report = form.save(commit=False)
             report.sender = profile
             report.receiver = receiver
-            report.sender_username = profile.username
+            report.sender_username = profile.first_name
             report.receiver_username = receiver.username
 
             report.save()
@@ -342,7 +348,7 @@ def requestDocument(request):
             request = form.save(commit=False)
             request.sender = profile
             request.receiver = receiver
-            request.sender_username = profile.username
+            request.sender_username = profile.first_name
             request.receiver_username = receiver.username
 
             request.save()
@@ -402,12 +408,38 @@ def verified(request, pk):
 
 @login_required(login_url='login')
 def createMessage(request, pk):
+    page = 'createmessage'
+
     profile = request.user.profiles
     receiver = Profiles.objects.get(id=pk)
     form = MessageForm()
 
     if request.method == 'POST':
         form = MessageForm(request.POST, request.FILES)
+        if form.is_valid():
+            send_message = form.save(commit=False)
+            send_message.sender = profile
+            send_message.receiver = receiver
+
+            send_message.save()
+            return redirect('account')
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'profiles/create-message.html', context)
+
+
+@login_required(login_url='login')
+def createSendMessage(request, pk):
+    page = 'createsendmessage'
+
+    profile = request.user.profiles
+    receiver = Profiles.objects.get(id=pk)
+    form = SendMessageForm()
+
+    if request.method == 'POST':
+        form = SendMessageForm(request.POST, request.FILES)
         if form.is_valid():
             send_message = form.save(commit=False)
             send_message.sender = profile
@@ -447,6 +479,22 @@ def viewMessage(request, pk):
     if pisa_status.err:
        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
+
+
+@login_required(login_url='login')
+def sendViewMessage(request, pk):
+    profile = request.user.profiles
+    sendViewMessage = profile.send_message.get(id=pk)
+
+    if sendViewMessage.is_read == False:
+        sendViewMessage.is_read = True
+        sendViewMessage.save()
+
+    context = {
+        'sendViewMessage':sendViewMessage,
+    }
+    return render(request, 'profiles/sendView-message.html', context)
 
 
 
@@ -561,6 +609,21 @@ def deleteRequest(request, pk):
 
 
 @login_required(login_url='login')
+def doneRequest(request, pk):
+    requestObj = Requests.objects.get(id=pk)
+
+    if request.method == 'POST':
+        requestObj.done = True
+        requestObj.save()
+        return redirect('account')
+
+    context = {
+        'Obj': requestObj,
+    }
+    return render(request, 'profiles/done-template.html', context)
+
+
+@login_required(login_url='login')
 def deleteReport(request, pk):
     reportObj = Reports.objects.get(id=pk)
 
@@ -574,6 +637,34 @@ def deleteReport(request, pk):
     }
     return render(request, 'profiles/delete-template.html', context)
 
+
+@login_required(login_url='login')
+def doneReport(request, pk):
+    reportObj = Reports.objects.get(id=pk)
+
+    if request.method == 'POST':
+        reportObj.done = True
+        reportObj.save()
+        return redirect('account')
+
+    context = {
+        'Obj': reportObj,
+    }
+    return render(request, 'profiles/done-template.html', context)
+
+@login_required(login_url='login')
+def doneVerification(request, pk):
+    verObj = Verificationss.objects.get(id=pk)
+
+    if request.method == 'POST':
+        verObj.done = True
+        verObj.save()
+        return redirect('account')
+
+    context = {
+        'Obj': verObj,
+    }
+    return render(request, 'profiles/done-template.html', context)
 
 @login_required(login_url='login')
 def createProfile(request):

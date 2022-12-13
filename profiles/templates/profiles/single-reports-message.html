@@ -5,7 +5,11 @@
 {% block content %}
 <div class="request-report-message">
     <h2>
-        REPORT MESSAGE
+        REPORT MESSAGE  
+        {% if reportMessage.done == True %}
+        <span style="color: #006500; font-weight:bolder; font-size:20px; float:right;">Solved</span>
+        {% else %}
+        {% endif %}
     </h2>
     <div class="message-content">
         <p>{{ reportMessage.sender.first_name }} {{ reportMessage.sender.last_name }}</p>
