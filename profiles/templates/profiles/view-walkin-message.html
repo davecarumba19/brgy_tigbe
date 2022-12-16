@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <title>{{ sendMessage.owner.first_name }} {{ sendMessage.document_type }}</title>
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+    <img src="static/img/cert.jpg" alt="">
+    <p style="font-size: 20px; font-weight: bold; text-align: center; margin-bottom: 50px; margin-top: 50px;">{{ sendMessage.document_type }}</p>
+    <p style="font-size: 13px;">Sa kinauukulan,</p>
+    <p style="font-size: 13px;">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pinatutunayan ng Tanggapan ng Punong Barangay ng Tigbe sa pamamagitan lgg. ABC. ALFREDLEW PAUL L. GERMAR and mga sumusunod:
+    </p>
+    <table width="100%" border="1" cellspacing="0" style="margin-bottom: 30px;">
+          <tr style="padding: 10px 10px 5px 10px;">
+            <td rowspan="2" colspan="1" style="text-align: center;">PANGALAN NG KLIYENTE</td>
+            <td rowspan="2" colspan="3" style="font-weight: bold; font-size: 15px; text-align: center;">
+                {{ sendMessage.owner.first_name }} 
+                {% if sendMessage.owner.last_name == None %}
+                {% else %}
+                {{ sendMessage.owner.last_name }}
+                {% endif %}
+            </td>
+          </tr>
+          <tr></tr>
+          <tr style="padding: 2px 2px 0px 2px;">
+            <td style="text-align: center;">CIVIL STATUS</td>
+            <td style="text-align: center; font-weight: bold; font-size: 12px;">{{ sendMessage.owner.status }}</td>
+            <td style="text-align: center;">GENDER</td>
+            <td style="text-align: center;font-weight: bold; font-size: 12px;">{{ sendMessage.owner.gender }}</td>
+          </tr>
+          <tr style="padding: 5px 5px 2px 5px;">
+            <td rowspan="1" colspan="1" style="text-align: center;">ADDRESS</td>
+            <td rowspan="1" colspan="3" style="text-align: center;font-weight: bold; font-size: 13px;">
+                {{ sendMessage.owner.blk_unit }} {{ sendMessage.owner.phase_street }} {{ sendMessage.owner.village }}, Brgy. Tigbe         </td>
+            </tr>
+    </table>
+    <p style="font-size: 13px;">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Na sa aking nasasakupan ay napapabilang sa mahirap na pamilya ng aming barangay, kapuspalad at walang sapat kakayahan upang suportahan ang kanyang pangangailangan.
+    </p>
+    <table width="100%" border="1" cellspacing="0" style="margin-bottom: 30px;">
+        <tr style="padding: 10px 10px 5px 10px;">
+          <td rowspan="2" colspan="1" style="text-align: center;">KAUGNAYAN SA PASYENTE</td>
+          <td rowspan="2" colspan="3" style="font-weight: bold; font-size: 15px; text-align: center;">
+              {{ sendMessage.owner.first_name }} {{ sendMessage.owner.last_name }}
+          </td>
+          <td rowspan="2" colspan="1" style="text-align: center;">KAUGNAYAN SA</td>
+          <td rowspan="2" colspan="3" style="font-weight: bold; font-size: 15px; text-align: center;">
+              KLIYENTE
+          </td>
+        </tr>
+        <tr></tr>
+        <tr style="padding: 5px 5px 2px 5px;">
+          <td style="text-align: center;" colspan="2">LAYUNIN</td>
+          <td style="text-align: center; font-weight: bold; font-size: 12px;" colspan="6">{{ sendMessage.purpose }}</td>
+        </tr>
+  </table>
+  <p style="font-size: 13px;">
+    Ipinagkaloob ngayong ika-{{ sendMessage.date_created|date:"d" }} ng {{ sendMessage.date_created|date:"F" }} taong {{ sendMessage.date_created|date:"Y" }}.
+  </p>
+  <img src="static/img/brgycap.png" alt="">
+  <p style="font-size: 12px; font-weight: bold; text-align: center; background-color:#da156f; color: white; padding: 5px 5px 2px 5px; margin-top: 100px;">#TATAK<span style="font-size: 15px;">GERMAR</span></p>
+</body>
+
+</html>

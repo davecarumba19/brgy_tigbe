@@ -15,8 +15,11 @@ body {
     color: white;
     margin: 0 0 0 10px;
 }
-.banner a {
+.banner div {
     margin-left: auto;
+}
+.banner a {
+    margin-left: 1rem;
 }
 .banner a input {
     margin-top: 1px;

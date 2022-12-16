@@ -53,7 +53,11 @@
         <div class="card m-4" style="width: 18rem;">
             <div class="card-body ms-auto me-auto w-100">
                 <img src="{{ walkInProfile.profile_image.url }}" alt="">
-              <h5 class="card-title text-center">{{ walkInProfile.first_name }} {{ walkInProfile.last_name }}
+              <h5 class="card-title text-center">{{ walkInProfile.first_name }}
+              {% if walkInProfile.last_name == None %}
+              {% else %}
+              {{ walkInProfile.last_name }}
+              {% endif %}
                 {% if walkInProfile.verified == False %}
                 {% else %}
                 <i class="bi bi-patch-check-fill" style="color: rgb(64, 147, 255); padding-left:0.5rem; vertical-align:middle;"></i>

@@ -8,7 +8,11 @@
 
 <div class="profile-details">
         <img src="{{ walkInProfiles.profile_image.url }}" alt="">
-        <h4 class="fw-bold"> {{ walkInProfiles.first_name }} {{ walkInProfiles.last_name }}
+        <h4 class="fw-bold"> {{ walkInProfiles.first_name }}
+            {% if walkInProfiles.last_name == None %}
+            {% else %}
+            {{ walkInProfiles.last_name }}
+            {% endif %}
             {% if walkInProfiles.verified == False %}
             {% else %}
                 <i class="bi bi-patch-check-fill" style="color: rgb(64, 147, 255); padding-left:0.5rem; vertical-align:middle;"></i>
@@ -16,7 +20,7 @@
         </h4>
         <div class="profile-sub-details">
             <p>{{ walkInProfiles.email }}</p>
-            <p>Blk/Unit {{ walkInProfiles.blk_unit }} Phase/Street{{ walkInProfiles.phase_street }}, Brgy. Tigbe</p>
+            <p>{{ walkInProfiles.blk_unit }} {{ walkInProfiles.phase_street }}, Brgy. Tigbe</p>
             <p>{{ walkInProfiles.status }}</p>
             <p>{{ walkInProfiles.gender }}</p>
             <p>{{ walkInProfiles.vaccine }}</p>

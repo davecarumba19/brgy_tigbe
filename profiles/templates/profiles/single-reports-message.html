@@ -15,6 +15,12 @@
         <p>{{ reportMessage.sender.first_name }} {{ reportMessage.sender.last_name }}</p>
         <p>{{ reportMessage.location }} | {{ reportMessage.date_created }}</p>
         <p>{{ reportMessage.message }}</p>
+
+        {% if reportMessage.remark == None %}
+        {% else %}
+        <p style="font-weight: bold;">Remarks:</p>
+        <p>{{ reportMessage.remark }}</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

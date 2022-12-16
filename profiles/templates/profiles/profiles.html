@@ -16,11 +16,7 @@
         </h4>
         <div class="profile-sub-details">
             <p>{{ profile.email }}</p>
-            {% if request.user.id == 1 %}
-            <p>Brgy. Tigbe</p>
-            {% else %}
-            <p>Blk/Unit {{ profile.blk_unit }} Phase{{ profile.phase_street }}, Brgy. Tigbe</p>
-            {% endif %}
+            <p>{{ profile.blk_unit }} {{ profile.phase_street }}, Brgy. Tigbe</p>
             <p>{{ profile.status }}</p>
             <p>{{ profile.gender }}</p>
             <p>{{ profile.vaccine }}</p>
@@ -28,7 +24,6 @@
         </div>
         {% if request.user.id == 1 %}
         <div class="send-message-btn">
-            <a href="{% url 'verified' profile.id %}"><p>Verify Account</p></a>
             <a href="{% url 'single-history' profile.id %}" class="bg-primary"><p>View Request & Report History</p></a>
         </div>
         {% else %}

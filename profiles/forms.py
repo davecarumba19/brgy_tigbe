@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Profiles, Reports, Requests, Messages, SendMessages, Verificationss, WalkInProfiles
+from .models import Profiles, Reports, Requests, Messages, SendMessages, Verificationss, WalkInProfiles, WalkInRequests
 from django import forms
 
 
@@ -48,6 +48,16 @@ class ReportsForm(ModelForm):
         self.fields['location'].widget.attrs.update({'placeholder':'Enter Location', 'class':'reportsConcernInput', 'required':'required'})
         self.fields['message'].widget.attrs.update({'placeholder':'Your Message', 'class':'reportsConcernInput', 'required':'required'})
 
+class RemarkReportsForm(ModelForm):
+    class Meta:
+        model = Reports
+        fields = ['remark']
+
+    def __init__(self, *args, **kwargs):
+        super(RemarkReportsForm, self).__init__(*args, **kwargs)
+        self.fields['remark'].widget.attrs.update({'placeholder':'Add Remark', 'class':'reportsConcernInput', 'required':'required'})
+
+
 class RequestsForm(ModelForm):
     class Meta:
         model = Requests
@@ -58,6 +68,17 @@ class RequestsForm(ModelForm):
         self.fields['document_type'].widget.attrs.update({'class':'requestDocumentInput', 'required':'required'})
         self.fields['purpose'].widget.attrs.update({'placeholder':'Document Purpose' ,'class':'requestDocumentInput', 'required':'required'})
 
+
+class WalkInRequestsForm(ModelForm):
+    class Meta:
+        model = WalkInRequests
+        fields = ['owner','document_type', 'purpose']
+
+    def __init__(self, *args, **kwargs):
+        super(WalkInRequestsForm, self).__init__(*args, **kwargs)
+        self.fields['owner'].widget.attrs.update({'placeholder':'Enter Owner Name','class':'requestDocumentInput', 'required':'required'})
+        self.fields['document_type'].widget.attrs.update({'class':'requestDocumentInput', 'required':'required'})
+        self.fields['purpose'].widget.attrs.update({'placeholder':'Document Purpose' ,'class':'requestDocumentInput', 'required':'required'})
 
 
 class MessageForm(ModelForm):
@@ -109,8 +130,8 @@ class WalkInProfileForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(WalkInProfileForm, self).__init__(*args, **kwargs)
-        self.fields['first_name'].widget.attrs.update({'placeholder':'First Name', 'class':'createProfileWalkInInput'})
-        self.fields['last_name'].widget.attrs.update({'placeholder':'Last Name', 'class':'createProfileWalkInInput'})
+        self.fields['first_name'].widget.attrs.update({'placeholder':'Full Name', 'class':'createProfileWalkInInput'})
+        self.fields['last_name'].widget.attrs.update({'placeholder':'Suffix', 'class':'createProfileWalkInInput'})
         self.fields['blk_unit'].widget.attrs.update({'placeholder':'Enter Blk/Unit', 'class':'createProfileWalkInInput'})
         self.fields['phase_street'].widget.attrs.update({'placeholder':'Enter Phase/Street', 'class':'createProfileWalkInInput'})
         self.fields['email'].widget.attrs.update({'placeholder':'Enter Email', 'class':'createProfileWalkInInput'})
@@ -123,3 +144,5 @@ class WalkInProfileForm(ModelForm):
         self.fields['profile_image'].widget.attrs.update({'class':'createProfileWalkInInput'})
         self.fields['vaccine'].label = 'Vaccinated?'
         self.fields['verified'].label = 'Verified Resident?'
+        self.fields['first_name'].label = 'Full Name'
+        self.fields['last_name'].label = 'Suffix'

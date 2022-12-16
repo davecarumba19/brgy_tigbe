@@ -7,11 +7,11 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 
 from django.contrib import messages
-from .models import Profiles, Requests, Reports, Verificationss, WalkInProfiles
+from .models import Profiles, Requests, Reports, Verificationss, WalkInProfiles, WalkInRequests
 from main.models import News, Events
-from .forms import CustomUserCreationForm, ProfileForm, ReportsForm, RequestsForm, MessageForm, SendMessageForm, VerificationForm, VerifyProfileForm, WalkInProfileForm
+from .forms import CustomUserCreationForm, ProfileForm, ReportsForm, RemarkReportsForm, RequestsForm, MessageForm, SendMessageForm, VerificationForm, VerifyProfileForm, WalkInProfileForm, WalkInRequestsForm
 
-from .resources import RequestResource, ReportResource
+from .resources import RequestResource, ReportResource, WalkInRequestResource
 from django.http import HttpResponse
 from tablib import Dataset
 
@@ -121,11 +121,13 @@ def userAccount(request):
     profile = request.user.profiles
     newsObj = News.objects.all().order_by('-date_created')
     eventsObj = Events.objects.all().order_by('-date_created')[:3]
+    walkinprofile = WalkInProfiles.objects.all().count()
 
     context = {
         'profile': profile,
         'newsObj': newsObj,
         'eventsObj': eventsObj,
+        'walkinprofile': walkinprofile,
     }
     return render(request, 'profiles/account.html', context)
 
@@ -225,6 +227,7 @@ def inbox(request):
     unreadMessage = sendMessage.filter(is_read=False).count()
     unreadVerifySendMessage = verifySendMessage.filter(is_read=False).count()
     unreadVerification = verifyMessage.filter(is_read=False).count()
+    walkinprofile = WalkInProfiles.objects.all().count()
 
     context = {
         'requestDocument': requestDocument,
@@ -238,6 +241,7 @@ def inbox(request):
         'unreadVerifySendMessage': unreadVerifySendMessage,
         'unreadVerification': unreadVerification,
         'profile': profile,
+        'walkinprofile': walkinprofile,
     }
     return render(request, 'profiles/inbox.html', context)
 
@@ -337,7 +341,28 @@ def reportConcern(request):
 
 
 @login_required(login_url='login')
+def remarkReports(request, pk):
+    profile = request.user.profiles
+    remarkObj = Reports.objects.get(id=pk)
+    form = RemarkReportsForm()
+
+    if request.method == 'POST':
+        form = RemarkReportsForm(request.POST, instance=remarkObj)
+        if form.is_valid():
+            report = form.save(commit=False)
+
+            report.save()
+            return redirect('account')
+
+    context = {
+        'form':form,
+    }
+    return render(request, 'profiles/remark-report.html', context)
+
+
+@login_required(login_url='login')
 def requestDocument(request):
+    page = 'reqdoc'
     profile = request.user.profiles
     receiver = Profiles.objects.get(id='d26b5cd8-0c06-4c7a-b1ac-030894b5e356')
     form = RequestsForm()
@@ -356,9 +381,30 @@ def requestDocument(request):
 
     context = {
         'form':form,
+        'page':page,
     }
     return render(request, 'profiles/request.html', context)
 
+
+
+@login_required(login_url='login')
+def walkinRequestDocument(request):
+    page = 'walkinreq'
+    profile = request.user.profiles
+    form = WalkInRequestsForm()
+
+    if request.method == 'POST':
+        form = WalkInRequestsForm(request.POST)
+        if form.is_valid():
+            request = form.save(commit=False)
+        
+            request.save()
+            return redirect('account')
+
+    context = {
+        'form':form,
+    }
+    return render(request, 'profiles/request.html', context)
 
 
 @login_required(login_url='login')
@@ -426,6 +472,7 @@ def createMessage(request, pk):
 
     context = {
         'form': form,
+        'page': page,
     }
     return render(request, 'profiles/create-message.html', context)
 
@@ -481,6 +528,32 @@ def viewMessage(request, pk):
     return response
 
 
+@login_required(login_url='login')
+def viewWalkinMessage(request, pk):
+    profile = request.user.profiles
+    sendMessage = WalkInRequests.objects.get(id=pk)
+
+    if sendMessage.is_read == False:
+        sendMessage.is_read = True
+        sendMessage.save()
+    
+    template_path = 'profiles/view-walkin-message.html'
+    context = {'sendMessage': sendMessage}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="document.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+    # if error then show some funny view
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
 
 @login_required(login_url='login')
 def sendViewMessage(request, pk):
@@ -500,29 +573,62 @@ def sendViewMessage(request, pk):
 
 @login_required(login_url='login')
 def history(request):
+    search_request_report = ''
+
     profile = request.user.profiles
-    historyRequest = Requests.objects.all().order_by('-date_created')
-    historyReports = Reports.objects.all().order_by('-date_created')
     historyVerifications = Verificationss.objects.all().order_by('-date_created')
     totalRequest = Requests.objects.filter(hide=False).count()
+    totalWalkinRequest = WalkInRequests.objects.filter(hide=False).count()
     totalReports = Reports.objects.filter(hide=False).count()
     totalVerifications = Verificationss.objects.all().count()
     singleHistoryRequest = Requests.objects.filter(sender=profile.id).order_by('-date_created')
     singleHistoryReports = Reports.objects.filter(sender=profile.id).order_by('-date_created')
     singleTotalRequest = Requests.objects.filter(sender=profile.id).count()
     singleTotalReports = Reports.objects.filter(sender=profile.id).count()
+    walkinprofile = WalkInProfiles.objects.all().count()
+
+
+
+    if request.GET.get('searchRequestReport'):
+        search_request_report = request.GET.get('searchRequestReport')
+
+    historyRequest = Requests.objects.filter(
+        Q(sender__first_name__icontains=search_request_report) |
+        Q(sender__last_name__icontains=search_request_report) |
+        Q(purpose__icontains=search_request_report) |
+        Q(document_type__icontains=search_request_report) |
+        Q(date_created__icontains=search_request_report)
+        ).order_by('-date_created')
+        
+    historyWalkinRequest = WalkInRequests.objects.filter(
+        Q(owner__first_name__icontains=search_request_report) |
+        Q(owner__last_name__icontains=search_request_report) |
+        Q(purpose__icontains=search_request_report) |
+        Q(document_type__icontains=search_request_report) |
+        Q(date_created__icontains=search_request_report)
+        ).order_by('-date_created')
+
+    historyReports = Reports.objects.filter(
+        Q(sender__first_name__icontains=search_request_report) |
+        Q(sender__last_name__icontains=search_request_report) |
+        Q(date_created__icontains=search_request_report)
+        ).order_by('-date_created')
 
     context = {
+        'profile':profile,
         'historyRequest': historyRequest,
         'historyReports': historyReports,
+        'historyWalkinRequest': historyWalkinRequest,
         'historyVerifications': historyVerifications,
         'totalRequest': totalRequest,
+        'totalWalkinRequest': totalWalkinRequest,
         'totalReports': totalReports,
         'totalVerifications': totalVerifications,
         'singleHistoryRequest': singleHistoryRequest,
         'singleHistoryReports': singleHistoryReports,
         'singleTotalRequest': singleTotalRequest,
         'singleTotalReports': singleTotalReports,
+        'walkinprofile': walkinprofile,
     }
     return render(request, 'profiles/history.html', context)
 
@@ -556,6 +662,31 @@ def export_data_requests(request):
         if file_format == 'CSV':
             response = HttpResponse(dataset.csv, content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename="requests_exported_data.csv"'
+            return response        
+        elif file_format == 'JSON':
+            response = HttpResponse(dataset.json, content_type='application/json')
+            response['Content-Disposition'] = 'attachment; filename="exported_data.json"'
+            return response
+        elif file_format == 'XLS (Excel)':
+            response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="exported_data.xls"'
+            return response   
+
+    return render(request, 'profiles/export.html')
+
+
+
+@login_required(login_url='login')
+def export_data_walkinrequests(request):
+    hide = WalkInRequests.objects.filter(hide=False)
+    if request.method == 'POST':
+        # Get selected option from form
+        file_format = request.POST['file-format']
+        request_resource = WalkInRequestResource()
+        dataset = request_resource.export(hide)
+        if file_format == 'CSV':
+            response = HttpResponse(dataset.csv, content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="walkin_requests_exported_data.csv"'
             return response        
         elif file_format == 'JSON':
             response = HttpResponse(dataset.json, content_type='application/json')
@@ -609,6 +740,21 @@ def deleteRequest(request, pk):
 
 
 @login_required(login_url='login')
+def deleteWalkinRequest(request, pk):
+    requestObj = WalkInRequests.objects.get(id=pk)
+
+    if request.method == 'POST':
+        requestObj.hide = True
+        requestObj.save()
+        return redirect('account')
+
+    context = {
+        'Obj': requestObj,
+    }
+    return render(request, 'profiles/delete-template.html', context)
+
+
+@login_required(login_url='login')
 def doneRequest(request, pk):
     requestObj = Requests.objects.get(id=pk)
 
@@ -636,6 +782,22 @@ def deleteReport(request, pk):
         'Obj': reportObj,
     }
     return render(request, 'profiles/delete-template.html', context)
+
+
+@login_required(login_url='login')
+def deleteVerification(request, pk):
+    verObj = Verificationss.objects.get(id=pk)
+
+    if request.method == 'POST':
+        verObj.hide = True
+        verObj.done = True
+        verObj.save()
+        return redirect('account')
+
+    context = {
+        'Obj': verObj,
+    }
+    return render(request, 'profiles/ver-template.html', context)
 
 
 @login_required(login_url='login')

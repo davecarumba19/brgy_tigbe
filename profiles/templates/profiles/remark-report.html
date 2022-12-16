@@ -1,0 +1,23 @@
+{% extends 'based.html' %}
+{% load static %}
+
+{% block content %}
+<div class="banner">
+    <h2 class="fw-bold">ADD REMARK</h2>
+</div>
+
+<div class="report-concern">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% for labels in form %}
+            {{labels}}
+        {% endfor %}
+    
+        <a href="{% url 'account' %}">
+            <input type="button" value="Cancel" class="reportsConcernCancelBtn">
+        </a>
+
+        <input type="submit" value="Report" class="reportsConcernSubmitBtn">
+    </form>
+</div>
+{% endblock %}

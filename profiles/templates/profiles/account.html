@@ -2,40 +2,46 @@
 {% load static %}
 
 {% block content %}
-{% if request.user.id == 1 %}
-    <div class="report-request">
-        <div class="report">
-            <a href="{% url 'create-news' %}"><i class="bi bi-plus-circle"></i> Create News</a>
-        </div>
-        <div class="request">
-            <a href="{% url 'create-events' %}"><i class="bi bi-plus-circle"></i> Create Events</a>
-        </div>
-        <div class="create-profile">
-            <a href="{% url 'create-profile' %}"><i class="bi bi-plus-circle"></i> Create Profile</a>
-        </div>
-    </div>
-{% else %}
-{% if profile.verified == False %}
-{% else %}
-<div class="report-request">
-    <div class="report">
-        <a href="{% url 'report-concern' %}"><i class="bi bi-flag-fill"></i> Report Concern</a>
-    </div>
-    <div class="request">
-        <a href="{% url 'request-document' %}"><i class="bi bi-send-fill"></i> Request Document</a>
-    </div>
-</div>
-{% endif %}
-{% endif %}
 <div class="banner">
 {% if request.user.id == 1 %}
     <h2 class="fw-bold">Hi Admin!</h2>
 {% else %}
     <h2 class="fw-bold">WELCOME TIGBEÑO, {{ profile.first_name }}</h2>
 {% endif %}
-    <a href="{% url 'search-account' %}">
-        <input type="button" value="Resident List">
-    </a>
+{% if request.user.id == 1 %}
+    <div>
+        <a href="{% url 'search-account' %}">
+            <input type="button" value="Resident List" style="background-color: #006500; color: white; border: 1px white solid;">
+        </a>
+        <a href="{% url 'create-news' %}">
+            <input type="button" value="Create News">
+        </a>
+        <a href="{% url 'create-events' %}">
+            <input type="button" value="Create Event">
+        </a>
+        <a href="{% url 'create-profile' %}">
+            <input type="button" value="Create Profile">
+        </a>
+        {% if walkinprofile == 0 %}
+        {% else %}
+        <a href="{% url 'request-document-walkin' %}">
+            <input type="button" value="Request Document for Walk In">
+        </a>
+        {% endif %}
+    </div>
+{% else %}
+{% if profile.verified == False %}
+{% else %}
+    <div>
+        <a href="{% url 'request-document' %}">
+            <input type="button" value="Request Document">
+        </a>
+        <a href="{% url 'report-concern' %}">
+            <input type="button" value="Report Concern">
+        </a>
+    </div>
+{% endif %}
+{% endif %}
 </div>
 
 {% if request.user.id == 1 %}
@@ -65,7 +71,7 @@
             <p><b>Address:</b> 
             {% if request.user.id == 1 %}
             {% else %}
-            {{ profile.blk_unit }} {{ profile.phase_street }}, 
+            {{ profile.blk_unit }} {{ profile.phase_street }} {{ profile.village }},
             {% endif %}
             Brgy.Tigbe</p>
             {% if request.user.id == 1 %}

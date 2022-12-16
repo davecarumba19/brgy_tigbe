@@ -72,7 +72,7 @@
     padding: 1rem;
 }
 .account-img {
-    padding: 2rem;
+    padding: 2rem 1rem 2rem 0;
 }
 .account-img img {
     border-radius: 50%;
@@ -230,36 +230,6 @@
     display: block;
 }
 
-/* Report Request */
-
-.report-request {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    padding: 2rem 2rem 0 2rem;
-    z-index: 1;
-}
-.report {
-    float: right;
-}
-.report, .request, .create-profile {
-    margin: 3rem 0.5rem 3rem 0.5rem;
-}
-.report a, .request a,  .create-profile a {
-    background-color: #3d3d3d;
-    color: white;
-    padding: 1rem;
-    text-decoration: none;
-    border-radius: 100px;
-    transition: 0.3s;
-    border: 1px #3d3d3d solid;
-}
-.report a:hover, .request a:hover,  .create-profile a:hover {
-    background-color: white;
-    border: 1px black solid;
-    color: #006500;
-}
-
 /* Report Concern */
 
 .report-concern {
@@ -311,6 +281,9 @@
     margin-right: auto;
     padding: 2rem 2rem 2.3rem 2rem;
     margin-top: 3rem;
+}
+.request-document p label {
+    margin-left: 1rem;
 }
 .requestDocumentInput {
     display: block;
@@ -385,13 +358,13 @@
 
 /* Inbox */
 
-.inbox {
+.inbox, .inbox2 {
     max-width: 90%;
     display: flex;
     justify-content: space-evenly;
     margin: 2rem;
 }
-.req, .rep, .ver {
+.req, .rep, .ver, .walkinreq {
     background-color: #eeeeee;
     width: 100%;
     margin: 1rem;
@@ -486,6 +459,9 @@
     padding: 2rem;
     border: #696969 1px solid;
     border-radius: 1rem;
+}
+.sendMessage p label {
+    margin-left: 1rem;
 }
 .sendMessageInputTextarea {
     display: block;

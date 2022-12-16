@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+{% if page == 'reqdoc' %}
 <div class="banner">
     <h2 class="fw-bold">REQUEST DOCUMENT</h2>
 </div>
@@ -9,9 +10,7 @@
 <div class="request-document">
     <form action="" method="POST">
         {% csrf_token %}
-        {% for labels in form %}
-            {{labels}}
-        {% endfor %}
+        {{ form.as_p }}
     
         <a href="{% url 'account' %}">
             <input type="button" value="Cancel" class="requestDocumentCancelBtn">
@@ -20,4 +19,23 @@
         <input type="submit" value="Request" class="requestDocumentSubmitBtn">
     </form>
 </div>
+{% else %}
+<div class="banner">
+    <h2 class="fw-bold">REQUEST DOCUMENT FOR WALK IN</h2>
+</div>
+
+<div class="request-document">
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+    
+        <a href="{% url 'account' %}">
+            <input type="button" value="Cancel" class="requestDocumentCancelBtn">
+        </a>
+
+        <input type="submit" value="Request" class="requestDocumentSubmitBtn">
+    </form>
+</div>
+{% endif %}
 {% endblock %}

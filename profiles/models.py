@@ -86,6 +86,7 @@ class Reports(models.Model):
     receiver_username = models.CharField(max_length=1000, null=True, blank=True, editable=False)
     location = models.CharField(max_length=1000, null=True, blank=True)
     message = models.TextField(null=True, blank=True)
+    remark = models.TextField(null=True, blank=True)
     is_read = models.BooleanField(default=False, null=True)
     hide = models.BooleanField(default=False, null=True)
     done = models.BooleanField(default=False, null=True)
@@ -122,6 +123,28 @@ class Requests(models.Model):
 
     class Meta:
         ordering = ['is_read', '-date_created']
+
+
+
+class WalkInRequests(models.Model):
+
+    DOCUMENT = (
+        ('Brgy. Clearance', 'Brgy. Clearance'),
+        ('Certificate of Indigency', 'Certificate of Indigency')
+    )
+
+    owner = models.ForeignKey(WalkInProfiles, on_delete=models.CASCADE, null=True, blank=True)
+    document_type = models.CharField(max_length=1000, null=True, blank=True, choices=DOCUMENT)
+    purpose = models.CharField(max_length=1000, null=True, blank=True)
+    is_read = models.BooleanField(default=False, null=True)
+    hide = models.BooleanField(default=False, null=True)
+    done = models.BooleanField(default=False, null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+
+    def __str__(self):
+        return self.owner.first_name
+        
 
 
 class Messages(models.Model):
