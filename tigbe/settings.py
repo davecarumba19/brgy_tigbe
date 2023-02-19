@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
 
     'import_export',
+    
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
