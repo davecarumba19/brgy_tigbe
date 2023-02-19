@@ -1,0 +1,13 @@
+{
+    "builds": [{
+        "src": "tigbe/wsgi.py",
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "15mb", "runtime": "python-3.10.6" }
+    }],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "tigbe/wsgi.py"
+        }
+    ]
+}
